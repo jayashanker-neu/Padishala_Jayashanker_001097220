@@ -5,6 +5,8 @@
  */
 package model;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author jayas
@@ -15,6 +17,7 @@ public class DriverLicence {
     private String dateIssued;
     private String dateExpiry;
     private String bloodType;
+    private ImageIcon image;
     // TODO: Add Image
 
     public String getLicNum() {
@@ -47,6 +50,14 @@ public class DriverLicence {
 
     public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public ImageIcon getImage() {
+        return image;
+    }
+
+    public void setImage(ImageIcon image) {
+        this.image = image;
     }
     
     

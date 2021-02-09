@@ -27,11 +27,14 @@
                   <Component id="lblLicenceNum" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtLicenceNum" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtDateIssued" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtDateExpiry" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtBloodType" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtLicenceNum" pref="126" max="32767" attributes="0"/>
+                      <Component id="txtDateIssued" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtDateExpiry" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtBloodType" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="btnBrowse" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="97" max="32767" attributes="0"/>
           </Group>
@@ -67,11 +70,14 @@
                   <Component id="lblBloodType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtBloodType" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Component id="lblPicture" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPicture" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnDriversLicence" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,6 +131,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDriversLicenceActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBrowse">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Browse"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
