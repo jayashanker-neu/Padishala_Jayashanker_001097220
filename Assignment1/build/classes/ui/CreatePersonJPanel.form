@@ -16,13 +16,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="lblCreatePerson" alignment="1" max="32767" attributes="0"/>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnCreatePerson" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Component id="lblCreatePerson" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
@@ -35,17 +30,22 @@
                   <Component id="lblLastName" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtFirstName" linkSize="4" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtDob" linkSize="4" alignment="0" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtAge" linkSize="4" alignment="0" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtHeight" linkSize="4" alignment="0" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtWeight" linkSize="4" alignment="0" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtSsn" linkSize="4" alignment="0" pref="126" max="32767" attributes="0"/>
-                  <Component id="txtLastName" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPhone" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtDob" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtHeight" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtWeight" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtSsn" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtPhone" linkSize="5" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtAge" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtFirstName" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Component id="txtLastName" linkSize="5" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="205" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnCreatePerson" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,9 +94,9 @@
                   <Component id="lblPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPhone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCreatePerson" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace pref="57" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
