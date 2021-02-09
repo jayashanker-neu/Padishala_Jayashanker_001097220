@@ -21,6 +21,7 @@ import model.Person;
 public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
 
     Person person;
+    ImageIcon image;
     /**
      * Creates new form DriversLicenceJPanel
      */
@@ -31,7 +32,7 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
     
     public ImageIcon resizeImage(String imagePath) {
         ImageIcon imageIcon = new ImageIcon(imagePath);
-        Image image = imageIcon.getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
     }
 
@@ -150,6 +151,7 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
         driverLicence.setDateExpiry(txtDateExpiry.getText());
         driverLicence.setDateIssued(txtDateIssued.getText());
         driverLicence.setLicNum(txtLicenceNum.getText());
+        driverLicence.setImage(image);
         
         person.setDriverLicence(driverLicence);
         
@@ -168,7 +170,7 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
             File selectedFile = file.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
             btnBrowse.setIcon(resizeImage(path));
-            person.getDriverLicence().setImage(resizeImage(path));
+            this.image = resizeImage(path);
         }
         else if(result == JFileChooser.CANCEL_OPTION){
             System.out.println("No File Selected");
