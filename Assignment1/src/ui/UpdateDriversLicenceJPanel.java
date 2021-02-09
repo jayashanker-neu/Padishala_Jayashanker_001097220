@@ -5,7 +5,12 @@
  */
 package ui;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.DriverLicence;
 import model.Person;
 
@@ -22,6 +27,12 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
     public UpdateDriversLicenceJPanel(Person person) {
         initComponents();
         this.person = person;
+    }
+    
+    public ImageIcon resizeImage(String imagePath) {
+        ImageIcon imageIcon = new ImageIcon(imagePath);
+        Image image = imageIcon.getImage().getScaledInstance(20, 30, Image.SCALE_SMOOTH);
+        return new ImageIcon(image);
     }
 
     /**
@@ -44,6 +55,7 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
         txtDateExpiry = new javax.swing.JTextField();
         txtBloodType = new javax.swing.JTextField();
         btnDriversLicence = new javax.swing.JButton();
+        btnBrowse = new javax.swing.JButton();
 
         lblDriversLicence.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblDriversLicence.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -66,6 +78,13 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBrowse.setText("Browse");
+        btnBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,11 +99,13 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
                     .addComponent(lblDateIssued)
                     .addComponent(lblLicenceNum))
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtLicenceNum, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(txtDateIssued)
-                    .addComponent(txtDateExpiry)
-                    .addComponent(txtBloodType))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtLicenceNum, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                        .addComponent(txtDateIssued)
+                        .addComponent(txtDateExpiry)
+                        .addComponent(txtBloodType))
+                    .addComponent(btnBrowse))
                 .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,11 +133,13 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBloodType)
                     .addComponent(txtBloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(lblPicture)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPicture)
+                    .addComponent(btnBrowse))
                 .addGap(18, 18, 18)
                 .addComponent(btnDriversLicence)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,8 +157,26 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnDriversLicenceActionPerformed
 
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
+        // TODO add your handling code here:
+        JFileChooser file = new JFileChooser();
+        file.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".Images", "jpg","gif","png");
+        file.addChoosableFileFilter(filter);
+        int result = file.showSaveDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = file.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            btnBrowse.setIcon(resizeImage(path));
+        }
+        else if(result == JFileChooser.CANCEL_OPTION){
+            System.out.println("No File Selected");
+        }
+    }//GEN-LAST:event_btnBrowseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnDriversLicence;
     private javax.swing.JLabel lblBloodType;
     private javax.swing.JLabel lblDateExpiry;
