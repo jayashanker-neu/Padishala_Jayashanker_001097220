@@ -168,6 +168,7 @@ public class UpdateDriversLicenceJPanel extends javax.swing.JPanel {
             File selectedFile = file.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
             btnBrowse.setIcon(resizeImage(path));
+            person.getDriverLicence().setImage(resizeImage(path));
         }
         else if(result == JFileChooser.CANCEL_OPTION){
             System.out.println("No File Selected");
