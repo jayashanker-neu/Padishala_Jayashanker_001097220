@@ -31,7 +31,7 @@ public class VitalSigns {
         this.heartRate = heartRate;
         this.systolicBP = systolicBP;
         this.weightInKilos = weightInKilos;
-        this.weightInPounds = weightInPounds;
+        this.weightInPounds = weightInKilos * 2.20462262;
     }
 
     public double getRespiratoryRate() {
@@ -78,7 +78,7 @@ public class VitalSigns {
 
     Boolean isVitalSignsNormal(Person person) {
         if (compareVitalSigns(person.getVitalSigns(),person.getAgeGroup()) == 0)
-                return true;
+            return true;
         else
             return false;
     }
@@ -120,6 +120,12 @@ public class VitalSigns {
             return 5;
         
         return result;
+    }
+    
+    @Override
+    public String toString(){
+        return " Respiratory Rate: "+ this.respiratoryRate + "\n Heart Rate: "+this.heartRate+"\n Systolic Blood Pressure: "+this.systolicBP+"\n Weight(KG): "+this.weightInKilos
+                +"\n Weight(lbs): "+this.weightInPounds;
     }
     
 }

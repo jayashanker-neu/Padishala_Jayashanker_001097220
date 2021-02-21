@@ -19,6 +19,13 @@ public class driver {
         Person person = new Person();
         initializePerson(person,keyboard);
         initializeVitalSigns(person, keyboard);
+        System.out.println("Vital Signs:\n"+person.getVitalSigns());
+        updateVitalSigns(person, keyboard);
+        System.out.println("Updated Vital Signs:\n"+person.getVitalSigns());
+        
+        System.out.println("\n\nVital Signs History:\n");
+        
+        person.getVitalSignsHistory().printHistory(person);
         
         String condition;
         
@@ -44,7 +51,17 @@ public class driver {
         System.out.println("\nInput VitalSigns");
         System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
         person.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
-        person.getVitalSigns().setWeightInPounds(person.getVitalSigns().getWeightInKilos() * 2.20462262);
+//        person.getVitalSigns().setWeightInPounds(person.getVitalSigns().getWeightInKilos() * 2.20462262);
+        person.setVitalSignsHistory(new VitalSignsHistory());
+    }
+    
+    public static void updateVitalSigns(Person person, Scanner scanner) {
+        System.out.println("\nInput new VitalSigns for: "+person.getName());
+        System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
+        person.getVitalSignsHistory().getHistory().add(person.getVitalSigns());
+        person.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
+//        person.getVitalSigns().setWeightInPounds(person.getVitalSigns().getWeightInKilos() * 2.20462262);
+        
     }
     
 }
