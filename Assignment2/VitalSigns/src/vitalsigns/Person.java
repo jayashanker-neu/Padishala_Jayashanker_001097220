@@ -83,5 +83,4 @@ public class Person {
         this.vitalSignsHistory = vitalSignsHistory;
     }
     
-    
 }

@@ -27,11 +27,13 @@ class VitalSignsHistory {
         this.history = history;
     }
     
-    public void printHistory(Person person) {
-        System.out.println("History of "+person.getName()+" with DOB: "+person.getDob()+" is: ");
-        for (VitalSigns visit: person.getVitalSignsHistory().getHistory()) {
-            System.out.println(visit);
+    public String toString() {
+        String returnString = new String();
+//        System.out.println("History of "+person.getName()+" with DOB: "+person.getDob()+" is: ");
+        for (VitalSigns visit: getHistory()) {
+            returnString += visit;
         }
+        return returnString;
     }
     
 }

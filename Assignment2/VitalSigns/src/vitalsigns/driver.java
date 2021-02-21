@@ -23,9 +23,7 @@ public class driver {
         updateVitalSigns(person, keyboard);
         System.out.println("Updated Vital Signs:\n"+person.getVitalSigns());
         
-        System.out.println("\n\nVital Signs History:\n");
-        
-        person.getVitalSignsHistory().printHistory(person);
+        System.out.println("\n\nVital Signs History:\n"+person.getVitalSignsHistory());
         
         String condition;
         
