@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Patient {
     
     String Name;
-    LocalDate dob; // = LocalDate.parse( "2016-09-20" ) ;;
+    LocalDate dob;
     VitalSigns vitalSigns;
     String ageGroup;
     VitalSignsHistory vitalSignsHistory;

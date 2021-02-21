@@ -62,7 +62,7 @@ public class VitalSignsNormal {
                 put("Toddler","10-14");
                 put("Preschooler","14-18");
                 put("SchoolAge","20-42");
-                put("Adolescent","50-9999");
+                put("Adolescent","50.00001-9999");
             }
         };
         
@@ -73,7 +73,7 @@ public class VitalSignsNormal {
                 put("Toddler","22-31");
                 put("Preschooler","31-40");
                 put("SchoolAge","41-92");
-                put("Adolescent","110-24999");
+                put("Adolescent","110.0001-24999");
             }
         };
     }
