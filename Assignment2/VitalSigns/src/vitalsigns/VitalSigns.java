@@ -5,6 +5,9 @@
  */
 package vitalsigns;
 
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
 /**
  *
  * @author jayas
@@ -16,12 +19,19 @@ public class VitalSigns {
     double systolicBP;
     double weightInKilos;
     double weightInPounds;
+    LocalDateTime vitalSignDatetime;
     
-//    private Map<String, String> respiratoryRateNormal;
-//    private Map<String, String> heartRateNormal;
-//    private Map<String, String> systolicBPNormal;
-//    private Map<String, String> weightInKilosNormal;
-//    private Map<String, String> weightInPoundsNormal;
+    public VitalSigns(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nEnter following Vital Sign Details: \n");
+        System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
+        this.respiratoryRate = scanner.nextDouble();
+        this.heartRate = scanner.nextDouble();
+        this.systolicBP = scanner.nextDouble();
+        this.weightInKilos = scanner.nextDouble();
+        this.weightInPounds = this.weightInKilos * 2.20462262;
+        this.vitalSignDatetime = LocalDateTime.now();
+    }
     
     public VitalSigns(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) { //, double weightInPounds){
         this.respiratoryRate = respiratoryRate;
@@ -29,6 +39,16 @@ public class VitalSigns {
         this.systolicBP = systolicBP;
         this.weightInKilos = weightInKilos;
         this.weightInPounds = weightInKilos * 2.20462262;
+        this.vitalSignDatetime = LocalDateTime.now();
+    }
+    
+    public void updateVitalSigns(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) { //, double weightInPounds){
+        this.respiratoryRate = respiratoryRate;
+        this.heartRate = heartRate;
+        this.systolicBP = systolicBP;
+        this.weightInKilos = weightInKilos;
+        this.weightInPounds = weightInKilos * 2.20462262;
+        this.vitalSignDatetime = LocalDateTime.now();
     }
 
     public double getRespiratoryRate() {
@@ -69,9 +89,7 @@ public class VitalSigns {
 
     public void setWeightInPounds(double weightInPounds) {
         this.weightInPounds = weightInPounds;
-    }
-    
-    
+    }    
 
     Boolean isVitalSignsNormal(Patient patient) {
         if (compareVitalSigns(patient.getVitalSigns(),patient.getAgeGroup()) == 0)
@@ -121,8 +139,32 @@ public class VitalSigns {
     
     @Override
     public String toString(){
-        return " Respiratory Rate: "+ this.respiratoryRate + "\n Heart Rate: "+this.heartRate+"\n Systolic Blood Pressure: "+this.systolicBP+"\n Weight(KG): "+this.weightInKilos
-                +"\n Weight(lbs): "+this.weightInPounds;
+        return " DateTime: " + this.vitalSignDatetime
+                + "\n Respiratory Rate: "+ this.respiratoryRate + "\n Heart Rate: "+this.heartRate+"\n Systolic Blood Pressure: "+this.systolicBP+"\n Weight(KG): "+this.weightInKilos
+                + "\n Weight(lbs): "+this.weightInPounds+"\n";
+    }
+
+    Boolean isThisVitalSignNormal(Patient patient, String vitalSign) {
+        VitalSigns vitalSigns = patient.getVitalSigns();
+        String ageGroup = patient.getAgeGroup();
+        
+        VitalSignsNormal vitalSignsNormal = new VitalSignsNormal();
+        
+        if(vitalSign.equals("Respiratory Rate"))
+            return vitalSigns.respiratoryRate >= Double.parseDouble(vitalSignsNormal.respiratoryRate.get(ageGroup).split("-")[0]) && 
+                vitalSigns.respiratoryRate <= Double.parseDouble(vitalSignsNormal.respiratoryRate.get(ageGroup).split("-")[1]);
+        else if (vitalSign.equals("Heart Rate"))
+            return vitalSigns.heartRate >= Double.parseDouble(vitalSignsNormal.heartRate.get(ageGroup).split("-")[0]) && 
+                vitalSigns.heartRate <= Double.parseDouble(vitalSignsNormal.heartRate.get(ageGroup).split("-")[1]);
+        else if (vitalSign.equals("SystolicBP"))
+            return vitalSigns.systolicBP >= Double.parseDouble(vitalSignsNormal.systolicBP.get(ageGroup).split("-")[0]) && 
+                vitalSigns.systolicBP <= Double.parseDouble(vitalSignsNormal.systolicBP.get(ageGroup).split("-")[1]);
+        else if (vitalSign.equals("Weight"))
+            return vitalSigns.weightInKilos >= Double.parseDouble(vitalSignsNormal.weightInKilos.get(ageGroup).split("-")[0]) && 
+                vitalSigns.weightInKilos <= Double.parseDouble(vitalSignsNormal.weightInKilos.get(ageGroup).split("-")[1]);
+        else
+            System.out.println("Given Vital Sign details are not found.\n");
+        return false;
     }
     
 }

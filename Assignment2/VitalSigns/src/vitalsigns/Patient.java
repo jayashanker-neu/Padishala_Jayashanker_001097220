@@ -7,6 +7,7 @@ package vitalsigns;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Scanner;
 
 /**
  *
@@ -22,6 +23,10 @@ public class Patient {
     
     public Boolean isPatientNormal(){
         return vitalSigns.isVitalSignsNormal(this);
+    }
+    
+    public Boolean isThisVitalSignNormal(String vitalSign){
+        return vitalSigns.isThisVitalSignNormal(this, vitalSign);
     }
 
     public VitalSigns getVitalSigns() {
@@ -81,6 +86,21 @@ public class Patient {
 
     public void setVitalSignsHistory(VitalSignsHistory vitalSignsHistory) {
         this.vitalSignsHistory = vitalSignsHistory;
+    }
+    
+    public VitalSigns newVitalSign(){
+        VitalSigns vitalSigns = new VitalSigns();
+        this.vitalSignsHistory.getHistory().add(this.vitalSigns);
+        this.vitalSigns = vitalSigns;
+        return vitalSigns;
+    }
+
+    void updateInfo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nEnter Patient Name: ");
+        this.Name = scanner.nextLine();
+        System.out.println("\nEnter Patient DOB: ");
+        this.setDob(LocalDate.parse(scanner.nextLine()));
     }
     
 }
