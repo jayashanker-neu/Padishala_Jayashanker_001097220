@@ -12,7 +12,7 @@ import java.time.Period;
  *
  * @author jayas
  */
-public class Person {
+public class Patient {
     
     String Name;
     LocalDate dob; // = LocalDate.parse( "2016-09-20" ) ;;

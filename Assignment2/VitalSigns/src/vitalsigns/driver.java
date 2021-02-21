@@ -16,49 +16,57 @@ public class driver {
     
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
-        Person person = new Person();
-        initializePerson(person,keyboard);
-        initializeVitalSigns(person, keyboard);
-        System.out.println("Vital Signs:\n"+person.getVitalSigns());
-        updateVitalSigns(person, keyboard);
-        System.out.println("Updated Vital Signs:\n"+person.getVitalSigns());
+        Patient patient = new Patient();
+        initializePerson(patient,keyboard);
+        initializeVitalSigns(patient, keyboard);
+        System.out.println("Vital Signs:\n"+patient.getVitalSigns());
+
+        System.out.println("Person condition is: "+(patient.isPatientNormal()?"Good":"Bad"));
         
-        System.out.println("\n\nVital Signs History:\n"+person.getVitalSignsHistory());
+        keyboard = new Scanner(System.in);
         
-        String condition;
-        
-        if (person.isPatientNormal()){
-            condition = "Good";
-        }
-        else {
-            condition = "Bad";
+        System.out.println("\nWant to enter details for another visit (Y/N)? ");
+        while (!keyboard.nextLine().equals("N")){
+            run(patient);
+            System.out.println("\nWant to enter details for another visit (Y/N)? ");
         }
         
-        System.out.println("Person condition is: "+condition);
+        System.out.println("\n\nVital Signs History:\n"+patient.getVitalSignsHistory());
+        System.out.println("\nLatest Vital Signs:\n"+patient.getVitalSigns());
     }
     
-    public static void initializePerson(Person person, Scanner scanner){
+    public static void initializePerson(Patient patient, Scanner scanner){
         System.out.println("Enter following Person Details:");
         System.out.print("Name: ");
-        person.setName(scanner.nextLine());
+        patient.setName(scanner.nextLine());
         System.out.print("DOB (YYYY-MM-DD): ");
-        person.setDob(LocalDate.parse(scanner.nextLine()));
+        patient.setDob(LocalDate.parse(scanner.nextLine()));
     }
     
-    public static void initializeVitalSigns(Person person, Scanner scanner) {
+    public static void initializeVitalSigns(Patient patient, Scanner scanner) {
         System.out.println("\nInput VitalSigns");
         System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
-        person.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
-//        person.getVitalSigns().setWeightInPounds(person.getVitalSigns().getWeightInKilos() * 2.20462262);
-        person.setVitalSignsHistory(new VitalSignsHistory());
+        patient.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
+//        patient.getVitalSigns().setWeightInPounds(patient.getVitalSigns().getWeightInKilos() * 2.20462262);
+        patient.setVitalSignsHistory(new VitalSignsHistory());
     }
     
-    public static void updateVitalSigns(Person person, Scanner scanner) {
-        System.out.println("\nInput new VitalSigns for: "+person.getName());
+    public static void updateVitalSigns(Patient patient, Scanner scanner) {
+        System.out.println("\nInput new VitalSigns for: "+patient.getName());
         System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
-        person.getVitalSignsHistory().getHistory().add(person.getVitalSigns());
-        person.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
-//        person.getVitalSigns().setWeightInPounds(person.getVitalSigns().getWeightInKilos() * 2.20462262);
+        patient.getVitalSignsHistory().getHistory().add(patient.getVitalSigns());
+        patient.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
+//        patient.getVitalSigns().setWeightInPounds(patient.getVitalSigns().getWeightInKilos() * 2.20462262);
+        
+    }
+    
+    public static void run(Patient patient){
+        Scanner keyboard = new Scanner(System.in);
+        
+        updateVitalSigns(patient, keyboard);
+        System.out.println("Updated Vital Signs:\n"+patient.getVitalSigns());
+        
+        System.out.println("Person condition is: "+(patient.isPatientNormal()?"Good":"Bad"));
         
     }
     

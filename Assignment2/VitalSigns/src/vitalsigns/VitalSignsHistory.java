@@ -29,7 +29,7 @@ class VitalSignsHistory {
     
     public String toString() {
         String returnString = new String();
-//        System.out.println("History of "+person.getName()+" with DOB: "+person.getDob()+" is: ");
+//        System.out.println("History of "+patient.getName()+" with DOB: "+patient.getDob()+" is: ");
         for (VitalSigns visit: getHistory()) {
             returnString += visit;
         }

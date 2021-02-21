@@ -5,9 +5,6 @@
  */
 package vitalsigns;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author jayas
@@ -76,8 +73,8 @@ public class VitalSigns {
     
     
 
-    Boolean isVitalSignsNormal(Person person) {
-        if (compareVitalSigns(person.getVitalSigns(),person.getAgeGroup()) == 0)
+    Boolean isVitalSignsNormal(Patient patient) {
+        if (compareVitalSigns(patient.getVitalSigns(),patient.getAgeGroup()) == 0)
             return true;
         else
             return false;
