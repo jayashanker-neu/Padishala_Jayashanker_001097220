@@ -27,7 +27,7 @@ public class driver {
         
         keyboard = new Scanner(System.in);
         int choice = keyboard.nextInt();
-        while (choice != 4) {
+        while (choice != 9) {
             keyboard = new Scanner(System.in);
             switch(choice){
                 case 1:
@@ -40,6 +40,22 @@ public class driver {
                 case 3:
                     patient.getVitalSignsHistory().printHistory();
                     break;
+                case 4:
+                    System.out.println("\nLatest Vital Signs of "+patient.getName());
+                    System.out.println(patient.getVitalSigns());
+                case 5:
+                    System.out.print("\nAvailable Values of VitalSigns\n"
+                            + "\tRespiratory Rate\n"
+                            + "\tHeart Rate\n"
+                            + "\tSystolicBP\n"
+                            + "\tWeight\n"
+                            + "\nEnter the VitalSign Name: ");
+                    
+                    patient.isThisVitalSignNormal(keyboard.nextLine());
+                case 6:
+                    System.out.println("\nPatient Name: "+patient.getName());
+                    System.out.println("Date of Birth: "+patient.getDob());
+                    System.out.println("Age Group: "+patient.getAgeGroup());
                 default:
                     System.out.println("\nProvide correct input\n");
             }
@@ -53,7 +69,10 @@ public class driver {
         System.out.println("1. Update Patient Info");
         System.out.println("2. Add latest Vital Signs Info from new visit");
         System.out.println("3. See history of Vital Signs");
-        System.out.println("4. Exit\n");
+        System.out.println("4. See latest Vital Signs");
+        System.out.println("5. Check if given Vital Sign is in normal condition");
+        System.out.println("6. View Patient Info");
+        System.out.println("9. Exit\n");
         System.out.println("Choice: ");
     }
     
@@ -75,7 +94,7 @@ public class driver {
     }
     
     public static void updateVitalSigns(Patient patient) {
-        patient.newVitalSign();   
+        patient.newVitalSign();
     }
     
 }

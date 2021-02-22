@@ -22,7 +22,7 @@ public class Patient {
     VitalSignsHistory vitalSignsHistory;
     
     public Boolean isPatientNormal(){
-        return vitalSigns.isVitalSignsNormal(this);
+        return vitalSigns.areVitalSignsNormal(this);
     }
     
     public Boolean isThisVitalSignNormal(String vitalSign){
@@ -89,10 +89,9 @@ public class Patient {
     }
     
     public VitalSigns newVitalSign(){
-        VitalSigns vitalSigns = new VitalSigns();
         this.vitalSignsHistory.getHistory().add(this.vitalSigns);
-        this.vitalSigns = vitalSigns;
-        return vitalSigns;
+        this.vitalSigns = new VitalSigns();
+        return this.vitalSigns;
     }
 
     void updateInfo() {

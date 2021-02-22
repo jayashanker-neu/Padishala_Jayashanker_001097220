@@ -33,6 +33,7 @@ class VitalSignsHistory {
     
     public String toString() {
         String returnString = new String();
+        returnString += "";
         int i = 1;
         for (VitalSigns visit: getHistory()) {
             returnString+="\nVital Signs "+i+": \n";
