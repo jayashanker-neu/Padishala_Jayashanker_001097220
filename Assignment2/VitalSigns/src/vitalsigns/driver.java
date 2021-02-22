@@ -43,6 +43,7 @@ public class driver {
                 case 4:
                     System.out.println("\nLatest Vital Signs of "+patient.getName());
                     System.out.println(patient.getVitalSigns());
+                    break;
                 case 5:
                     System.out.print("\nAvailable Values of VitalSigns\n"
                             + "\tRespiratory Rate\n"
@@ -50,12 +51,17 @@ public class driver {
                             + "\tSystolicBP\n"
                             + "\tWeight\n"
                             + "\nEnter the VitalSign Name: ");
-                    
-                    patient.isThisVitalSignNormal(keyboard.nextLine());
+                    String condition = keyboard.nextLine();
+                    if(patient.isThisVitalSignNormal(condition)) 
+                        System.out.println(condition+" for "+patient.getName()+" is Normal");
+                    else
+                        System.out.println(condition+" for "+patient.getName()+" is not good");
+                    break;
                 case 6:
                     System.out.println("\nPatient Name: "+patient.getName());
                     System.out.println("Date of Birth: "+patient.getDob());
                     System.out.println("Age Group: "+patient.getAgeGroup());
+                    break;
                 default:
                     System.out.println("\nProvide correct input\n");
             }
@@ -88,7 +94,7 @@ public class driver {
     public static void initializeVitalSigns(Patient patient) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nInput VitalSigns");
-        System.out.println("RespiratoryRate\tHeartRate\tSystolicBP\tWeightInKilos");
+        System.out.println("RespiratoryRate\t\tHeartRate\tSystolicBP\tWeightInKilos");
         patient.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
         patient.setVitalSignsHistory(new VitalSignsHistory());
     }

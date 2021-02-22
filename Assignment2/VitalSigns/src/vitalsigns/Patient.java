@@ -20,6 +20,7 @@ public class Patient {
     VitalSigns vitalSigns;
     String ageGroup;
     VitalSignsHistory vitalSignsHistory;
+    Boolean isPatientNormal;
     
     public Boolean isPatientNormal(){
         return vitalSigns.areVitalSignsNormal(this);
@@ -91,6 +92,8 @@ public class Patient {
     public VitalSigns newVitalSign(){
         this.vitalSignsHistory.getHistory().add(this.vitalSigns);
         this.vitalSigns = new VitalSigns();
+        this.isPatientNormal = this.isPatientNormal();
+        vitalSigns.setAreVitalSignsNormal(this.isPatientNormal);
         return this.vitalSigns;
     }
 

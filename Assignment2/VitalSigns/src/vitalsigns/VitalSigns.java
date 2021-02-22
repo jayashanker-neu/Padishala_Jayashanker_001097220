@@ -20,6 +20,7 @@ public class VitalSigns {
     double weightInKilos;
     double weightInPounds;
     LocalDateTime vitalSignDatetime;
+    Boolean areVitalSignsNormal;
     
 //    Boolean isRespiratoryRateNormal;
 //    Boolean isHeartRateNormal;
@@ -97,6 +98,16 @@ public class VitalSigns {
         this.weightInPounds = weightInPounds;
     }
 
+    public Boolean getAreVitalSignsNormal() {
+        return areVitalSignsNormal;
+    }
+
+    public void setAreVitalSignsNormal(Boolean areVitalSignsNormal) {
+        this.areVitalSignsNormal = areVitalSignsNormal;
+    }
+
+    
+    
     Boolean isRespiratoryRateNormal(Patient patient){
         
         VitalSignsNormal vitalSignsNormal = new VitalSignsNormal();
@@ -201,21 +212,21 @@ public class VitalSigns {
     
     @Override
     public String toString(){
-        return " DateTime: " + this.vitalSignDatetime
+        return "  DateTime: " + this.vitalSignDatetime
                 + "\n  Respiratory Rate: "+ this.respiratoryRate + "\n  Heart Rate: "+this.heartRate
-                +"\n  Systolic Blood Pressure: "+this.systolicBP+"\n  Weight(KG): "+this.weightInKilos
-                + "\n  Weight(lbs): "+this.weightInPounds+"\n";
+                + "\n  Systolic Blood Pressure: "+this.systolicBP+"\n  Weight(KG): "+this.weightInKilos
+                + String.format("\n  Weight(lbs): %6.2f", this.weightInPounds);
     }
 
     Boolean isThisVitalSignNormal(Patient patient, String vitalSign) {
       
-        if(vitalSign.equals("Respiratory Rate"))
+        if(vitalSign.toLowerCase().equals("Respiratory Rate".toLowerCase()))
             return isRespiratoryRateNormal(patient);
-        else if (vitalSign.equals("Heart Rate"))
+        else if (vitalSign.toLowerCase().equals("Heart Rate".toLowerCase()))
             return isHeartRateNormal(patient);
-        else if (vitalSign.equals("SystolicBP"))
+        else if (vitalSign.toLowerCase().equals("SystolicBP".toLowerCase()))
             return isSystolicBPNormal(patient);
-        else if (vitalSign.equals("Weight"))
+        else if (vitalSign.toLowerCase().equals("Weight".toLowerCase()))
             return isWeightNormal(patient);
         else
             System.out.println("Given Vital Sign details are not found.\n");
