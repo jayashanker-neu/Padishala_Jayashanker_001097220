@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vitalsigns;
+package model;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -17,21 +17,21 @@ public class Patient {
     
     String Name;
     LocalDate dob;
-    VitalSigns vitalSigns;
+    Encounter encounter;
     String ageGroup;
-    VitalSignsHistory vitalSignsHistory;
+    EncounterHistory encounterHistory;
     Boolean isPatientNormal;
     
     public Boolean isPatientNormal(){
-        return vitalSigns.areVitalSignsNormal(this);
+        return encounter.getVitalSigns().areVitalSignsNormal(this);
     }
     
     public Boolean isThisVitalSignNormal(String vitalSign){
-        return vitalSigns.isThisVitalSignNormal(this, vitalSign);
+        return encounter.getVitalSigns().isThisVitalSignNormal(this, vitalSign);
     }
 
-    public VitalSigns getVitalSigns() {
-        return vitalSigns;
+    public Encounter getEncounter() {
+        return encounter;
     }
 
     public String getAgeGroup() {
@@ -73,28 +73,29 @@ public class Patient {
         }
     }
 
-    public void setVitalSigns(VitalSigns vitalSigns) {
-        this.vitalSigns = vitalSigns;
+    public void setEncounter(Encounter encounter) {
+        this.encounter = encounter;
     }
 
     private void setAgeGroup(String ageGroup) {
         this.ageGroup = ageGroup;
     }
 
-    public VitalSignsHistory getVitalSignsHistory() {
-        return vitalSignsHistory;
+    public EncounterHistory getEncounterHistory() {
+        return encounterHistory;
     }
 
-    public void setVitalSignsHistory(VitalSignsHistory vitalSignsHistory) {
-        this.vitalSignsHistory = vitalSignsHistory;
+    public void setEncounterHistory(EncounterHistory encounterHistory) {
+        this.encounterHistory = encounterHistory;
     }
     
-    public VitalSigns newVitalSign(){
-        this.vitalSignsHistory.getHistory().add(this.vitalSigns);
-        this.vitalSigns = new VitalSigns();
+    public Encounter newEncounter(){
+        if (this.encounter != null)
+            this.encounterHistory.getHistory().add(this.encounter);
+        this.encounter = new Encounter();
         this.isPatientNormal = this.isPatientNormal();
-        vitalSigns.setAreVitalSignsNormal(this.isPatientNormal);
-        return this.vitalSigns;
+        encounter.vitalSigns.setAreVitalSignsNormal(this.isPatientNormal);
+        return this.encounter;
     }
 
     void updateInfo() {
@@ -103,6 +104,15 @@ public class Patient {
         this.Name = scanner.nextLine();
         System.out.println("\nEnter Patient DOB: ");
         this.setDob(LocalDate.parse(scanner.nextLine()));
+    }
+
+    VitalSigns getVitalSigns() {
+        return this.getEncounter().getVitalSigns();
+    }
+
+    void setVitalSigns(VitalSigns vitalSigns) {
+        this.newEncounter();
+        this.encounter.setVitalSigns(vitalSigns);
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vitalsigns;
+package model;
 
 import java.util.ArrayList;
 
@@ -11,32 +11,32 @@ import java.util.ArrayList;
  *
  * @author jayas
  */
-class VitalSignsHistory {
+class EncounterHistory {
     
-    ArrayList<VitalSigns> history;
+    ArrayList<Encounter> history;
     
-    public VitalSignsHistory() {
-        history = new ArrayList<VitalSigns>();
+    public EncounterHistory() {
+        history = new ArrayList<Encounter>();
     }
 
-    public ArrayList<VitalSigns> getHistory() {
+    public ArrayList<Encounter> getHistory() {
         return history;
     }
 
-    public void setHistory(ArrayList<VitalSigns> history) {
+    public void setHistory(ArrayList<Encounter> history) {
         this.history = history;
     }
     
     public void printHistory() {
-        System.out.println(toString());
+        System.out.println(this);
     }
     
     public String toString() {
         String returnString = new String();
         returnString += "";
         int i = 1;
-        for (VitalSigns visit: getHistory()) {
-            returnString+="\nVital Signs "+i+": \n";
+        for (Encounter visit: getHistory()) {
+            returnString+="\nEncounter "+i+": \n";
             returnString += visit;
             i++;
         }

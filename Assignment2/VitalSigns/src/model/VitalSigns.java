@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vitalsigns;
+package model;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -19,7 +19,6 @@ public class VitalSigns {
     double systolicBP;
     double weightInKilos;
     double weightInPounds;
-    LocalDateTime vitalSignDatetime;
     Boolean areVitalSignsNormal;
     
 //    Boolean isRespiratoryRateNormal;
@@ -36,7 +35,7 @@ public class VitalSigns {
         this.systolicBP = scanner.nextDouble();
         this.weightInKilos = scanner.nextDouble();
         this.weightInPounds = this.weightInKilos * 2.20462262;
-        this.vitalSignDatetime = LocalDateTime.now();
+//        this.vitalSignDatetime = LocalDateTime.now();
     }
     
     public VitalSigns(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) { //, double weightInPounds){
@@ -45,7 +44,7 @@ public class VitalSigns {
         this.systolicBP = systolicBP;
         this.weightInKilos = weightInKilos;
         this.weightInPounds = weightInKilos * 2.20462262;
-        this.vitalSignDatetime = LocalDateTime.now();
+//        this.vitalSignDatetime = LocalDateTime.now();
         
     }
     
@@ -55,7 +54,7 @@ public class VitalSigns {
         this.systolicBP = systolicBP;
         this.weightInKilos = weightInKilos;
         this.weightInPounds = weightInKilos * 2.20462262;
-        this.vitalSignDatetime = LocalDateTime.now();
+//        this.vitalSignDatetime = LocalDateTime.now();
     }
 
     public double getRespiratoryRate() {
@@ -212,8 +211,8 @@ public class VitalSigns {
     
     @Override
     public String toString(){
-        return "  DateTime: " + this.vitalSignDatetime
-                + "\n  Respiratory Rate: "+ this.respiratoryRate + "\n  Heart Rate: "+this.heartRate
+        return //"  DateTime: " + this.vitalSignDatetime + 
+                "\n  Respiratory Rate: "+ this.respiratoryRate + "\n  Heart Rate: "+this.heartRate
                 + "\n  Systolic Blood Pressure: "+this.systolicBP+"\n  Weight(KG): "+this.weightInKilos
                 + String.format("\n  Weight(lbs): %6.2f", this.weightInPounds);
     }

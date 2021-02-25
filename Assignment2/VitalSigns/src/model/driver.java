@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vitalsigns;
+package model;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -18,8 +18,8 @@ public class driver {
         Scanner keyboard = new Scanner(System.in);
         Patient patient = new Patient();
         initializePerson(patient);
-        initializeVitalSigns(patient);
-        System.out.println("Vital Signs:\n"+patient.getVitalSigns());
+        initializeEncounterVitalSigns(patient);
+        System.out.println("Encounter:\n"+patient.getEncounter());
 
         System.out.println("Patient condition is: "+(patient.isPatientNormal()?"Good":"Bad"));
         
@@ -38,7 +38,7 @@ public class driver {
                     updateVitalSigns(patient);
                     break;
                 case 3:
-                    patient.getVitalSignsHistory().printHistory();
+                    patient.getEncounterHistory().printHistory();
                     break;
                 case 4:
                     System.out.println("\nLatest Vital Signs of "+patient.getName());
@@ -91,16 +91,13 @@ public class driver {
         patient.setDob(LocalDate.parse(scanner.nextLine()));
     }
     
-    public static void initializeVitalSigns(Patient patient) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nInput VitalSigns");
-        System.out.println("RespiratoryRate\t\tHeartRate\tSystolicBP\tWeightInKilos");
-        patient.setVitalSigns(new VitalSigns(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble()));
-        patient.setVitalSignsHistory(new VitalSignsHistory());
+    public static void initializeEncounterVitalSigns(Patient patient) {
+        patient.newEncounter();
+        patient.setEncounterHistory(new EncounterHistory());
     }
     
     public static void updateVitalSigns(Patient patient) {
-        patient.newVitalSign();
+        patient.newEncounter();
     }
     
 }
