@@ -23,6 +23,8 @@ public class Person {
     LocalDate dob;
     String ageGroup;
     
+    Address address;
+    
     String houseNo;
     String street;
     String community;
@@ -126,6 +128,15 @@ public class Person {
         System.out.println("\nEnter Patient DOB: ");
         this.setDob(LocalDate.parse(scanner.nextLine()));
     }
+    
+    public void setAddress(Address address){
+        this.address = address;
+    }
+    
+    public Address getAddress(){
+        return this.address;
+    }
+    
     
 //    public static Person newPerson(){
 //        if (personDirectory == null)

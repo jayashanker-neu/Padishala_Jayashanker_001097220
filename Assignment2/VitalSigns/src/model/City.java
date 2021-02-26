@@ -29,5 +29,23 @@ public class City {
                     return community;
         return null;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Community> getCommunities() {
+        return communities;
+    }
+
+    public void setCommunities(ArrayList<Community> communities) {
+        this.communities = communities;
+    }
+    
+    
     
 }
