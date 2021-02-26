@@ -26,14 +26,24 @@ public class VitalSigns {
 //    Boolean isWeightNormal;
     
     public VitalSigns(){
+        Boolean good = false;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nEnter following Vital Sign Details: \n");
-        System.out.println("RespiratoryRate\t\tHeartRate\tSystolicBP\tWeightInKilos");
-        this.respiratoryRate = scanner.nextDouble();
-        this.heartRate = scanner.nextDouble();
-        this.systolicBP = scanner.nextDouble();
-        this.weightInKilos = scanner.nextDouble();
-        this.weightInPounds = this.weightInKilos * 2.20462262;
+        while(!good) {
+            try {
+                scanner = new Scanner(System.in);
+                System.out.println("\nEnter following Vital Sign Details: \n");
+                System.out.println("RespiratoryRate\t\tHeartRate\tSystolicBP\tWeightInKilos");
+                this.respiratoryRate = scanner.nextDouble();
+                this.heartRate = scanner.nextDouble();
+                this.systolicBP = scanner.nextDouble();
+                this.weightInKilos = scanner.nextDouble();
+                this.weightInPounds = this.weightInKilos * 2.20462262;
+                good = true;
+            }
+            catch(Exception e){
+                System.out.println("Enter values in correct format.\n");
+            }
+        }
 //        this.vitalSignDatetime = LocalDateTime.now();
     }
     

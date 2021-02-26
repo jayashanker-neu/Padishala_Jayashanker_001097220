@@ -6,7 +6,10 @@
 
 package model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -18,7 +21,7 @@ public class system {
     static PersonDirectory personDirectory = new PersonDirectory();
     static PatientDirectory patientDirectory = new PatientDirectory();
     
-    public static void main(String args[]){
+    public static void main(String args[]) throws Throwable{
         Scanner scanner = new Scanner(System.in);
         int choice;
         do {
@@ -43,10 +46,39 @@ public class system {
                     System.out.println("\nPatient " + patient.getFullName() + " is created successfully");
                     break;
                 case 5:
-                    showAllCities();
+                    showAllCitiesDetails();
                     break;
                 case 6:
-                    showAllCommunities();
+                    showAllCommunitiesDetails();
+                    break;
+                case 7:
+                    ArrayList<Community> allCommunities;
+                    int good = 0, bad = 0;
+                    System.out.println("\nEnter the Vital Sign Name to check: ");
+                    scanner = new Scanner(System.in);
+                    String condition = scanner.nextLine();
+                    allCommunities = showAllCommunities(false);
+                    Boolean vitalSignExists = true;
+                    for (Community community: allCommunities) {
+                        for(Patient p: patientDirectory.getDirectory()) {
+                            if(!p.getCommunityName().equals(community.getCommunityName()) ||
+                                    !p.getCityName().equals(community.getCityName()))
+                                continue;
+                            if(p.isThisVitalSignNormal(condition) == null){
+                                System.out.println("Vital Sign does not exist.\n");
+                                vitalSignExists = false;
+                                break;
+                            }
+                            if(p.isThisVitalSignNormal(condition))
+                                good++;
+                            else
+                                bad++;
+                        }
+                        if(!vitalSignExists)
+                            break;
+                        System.out.println("Patients with Normal "+condition + " in "+community+":"+good);
+                        System.out.println("Patients with abormal "+condition + " in "+community+":"+bad);
+                    }
                     break;
                 case 9:
                     return;
@@ -63,18 +95,42 @@ public class system {
         System.out.println(" 4. Add Patient");
         System.out.println(" 5. See all Cities");
         System.out.println(" 6. See all Communities");
+        System.out.println(" 7. See number of abnormal cases of given vitalSign in each community");
         System.out.println(" 9. Exit");
     }
     
-    private static void showAllCities(){
+    private static ArrayList<City> showAllCities(Boolean print){
+        Set<City> distinctCities = new HashSet<>();
+        for(Person p: personDirectory.getDirectory()) {
+            if(distinctCities.isEmpty()) {
+                distinctCities.add((City)p);
+            }
+            else {
+                for(City city: distinctCities) {
+                    if(p.getCityName().equals(city.getCityName()))
+                        continue;
+                    else
+                        distinctCities.add((City)p);
+                }
+            }
+        }
+        int i = 1;
+        ArrayList<City> distinctCitiesList = new ArrayList<>();
+        for(City city: distinctCities) {
+            if(print)
+                System.out.printf("%3d. %s\n",i,city.getCityName());
+            distinctCitiesList.add(city);
+            i++;
+        }
+        return distinctCitiesList;
+    }
+    
+    private static void showAllCitiesDetails(){
         int i = 1;
         int choice;
         String selectedCity;
         Scanner scanner = new Scanner(System.in);
-        for(Person person: personDirectory.getDirectory()){
-            System.out.printf("%3d. %s\n",i,person.getCityName());
-            i++;
-        }
+        ArrayList<City> allCities = showAllCities(true);
         System.out.println("\nChoose one of the cities to get into details\nOR type something to go back to previous menu: : ");
         try {
             choice = scanner.nextInt();
@@ -86,19 +142,43 @@ public class system {
         }
     }
     
-    private static void showAllCommunities(){
+    private static ArrayList<Community> showAllCommunities(Boolean print){
+        Set<Community> distinctCommunities = new HashSet<>();
+        for(Person p: personDirectory.getDirectory()) {
+            if(distinctCommunities.isEmpty()) {
+                distinctCommunities.add((Community)p);
+            }
+            else {
+                for(Community community: distinctCommunities) {
+                    if(p.getCommunityName().equals(community.getCommunityName()) && 
+                            p.getCityName().equals(community.getCityName()))
+                        continue;
+                    else
+                        distinctCommunities.add((Community)p);
+                }
+            }
+        }
+        int i = 1;
+        ArrayList<Community> distinctCommunitiesList = new ArrayList<>();
+        for(Community community: distinctCommunities) {
+            if(print)
+                System.out.printf("%3d. %s, %s\n",i,community.getCommunityName(), community.getCityName());
+            distinctCommunitiesList.add(community);
+            i++;
+        }
+        return distinctCommunitiesList;
+    }
+    
+    private static void showAllCommunitiesDetails(){
         int i = 1;
         int choice;
         String selectedCommunity;
         Scanner scanner = new Scanner(System.in);
-        for(Person person: personDirectory.getDirectory()){
-            System.out.printf("%3d. %s\n",i,person.getCommunityName());
-            i++;
-        }
+        ArrayList<Community> allCommunities = showAllCommunities(true);
         System.out.println("\nChoose one of the communities to get into details\nOR type something to go back to previous menu: : ");
         try {
             choice = scanner.nextInt();
-            selectedCommunity = personDirectory.directory.get(choice - 1).getCommunityName();
+            selectedCommunity = allCommunities.get(choice - 1).getCommunityName();
             showSelectedCommunity(selectedCommunity, personDirectory.directory.get(choice - 1).getCityName());
         }
         catch(Exception e){
@@ -168,6 +248,7 @@ public class system {
             System.out.println("   4. Get Vital Signs from all Hospital Visits");
             System.out.println("   5. Check if all Vital Signs are Normal");
             System.out.println("   6. Check if the given Vital Sign is Normal");
+            System.out.println("   7. Add new visit to Hospital");
             System.out.println("   9. Go to Previous Menu");
             choice = scanner.nextInt();
             switch(choice){
@@ -180,10 +261,10 @@ public class system {
                         System.out.println("Patient has only 1 visit\n");
                     else 
                         for(Encounter encounter: patient.getEncounterHistory().getHistory()) {
-                            System.out.printf("%3d. %s",i,encounter.getEncounterDatetime());
+                            System.out.printf("%3d. %s\n",i,encounter.getEncounterDatetime());
                             i++;
                         }
-                    System.out.printf("%3d. %s",i,patient.getEncounter().getEncounterDatetime());
+                    System.out.printf("%3d. %s\n",i,patient.getEncounter().getEncounterDatetime());
                     break;
                 case 3:
                     System.out.println(patient.getEncounter());
@@ -213,6 +294,9 @@ public class system {
                     else if(!patient.isThisVitalSignNormal(condition))
                         System.out.println(condition+" for "+patient.getName()+" is not good");
                     break;
+                case 7:
+                    patient.newEncounter();
+                    break;
                 case 9:
                     return;
             }
@@ -241,7 +325,7 @@ public class system {
             patientMenu(selectedPatient);
         }
         catch(Exception e) {
-            System.out.println("Going to previous menu\n");
+            System.out.println("Going to main menu\n");
         }
     }
 
@@ -266,7 +350,7 @@ public class system {
             patient.newEncounter();
         }
         return patient;
-    }
+    } 
 
     private static void showSelectedCommunity(String selectedCommunity, String selectedCity) {
         Scanner scanner = new Scanner(System.in);
@@ -293,6 +377,7 @@ public class system {
                     break;
                 case 2:
                     System.out.println("\nEnter the Vital Sign Name to check: ");
+                    scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
                     for(Patient patient: patientDirectory.getDirectory()) {
                         if(patient.isThisVitalSignNormal(condition))
@@ -332,6 +417,7 @@ public class system {
                     break;
                 case 2:
                     System.out.println("\nEnter the Vital Sign Name to check: ");
+                    scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
                     for(Patient patient: patientDirectory.getDirectory()) {
                         if(patient.isThisVitalSignNormal(condition))

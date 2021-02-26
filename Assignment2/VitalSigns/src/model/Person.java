@@ -38,9 +38,17 @@ public class Person extends House{
             try {
                 this.setDob(LocalDate.parse(scanner.nextLine()));
                 goodDate = true;
+                if(Period.between(dob, LocalDate.now()).getDays() < 0 ||
+                        Period.between(dob, LocalDate.now()).getMonths() < 0 ||
+                        Period.between(dob, LocalDate.now()).getYears() < 0)
+                {
+                    System.out.println("\nWhy are you like this? Enter the past date not future.");
+                    System.out.print("Enter DOB in correct format (YYYY-MM-DD): ");
+                    goodDate = false;
+                }
             }
             catch (Exception e) {
-                System.out.println("\nEnter DOB in correct format (YYYY-MM-DD): ");
+                System.out.print("\nEnter DOB in correct format (YYYY-MM-DD): ");
             }
         }
         

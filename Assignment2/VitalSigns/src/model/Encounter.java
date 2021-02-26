@@ -21,7 +21,7 @@ public class Encounter {
 
     public Encounter() {
         this.vitalSigns = new VitalSigns();
-        this.encounterDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-DD-MM hh:mm:ss"));
+        this.encounterDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
     }
 
     public VitalSigns getVitalSigns() {
