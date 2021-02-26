@@ -40,8 +40,6 @@ public class Encounter {
         this.encounterDatetime = encounterDatetime;
     }
     
-    
-    
     @Override
     public String toString(){
         return " Encounter Datetime: "+this.encounterDatetime +this.vitalSigns;

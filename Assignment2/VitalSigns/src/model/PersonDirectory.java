@@ -15,10 +15,28 @@ import java.util.ArrayList;
  */
 public class PersonDirectory {
 
-    ArrayList<Person> personDirectory;
+    ArrayList<Person> directory;
     
     public PersonDirectory() {
-        personDirectory = new ArrayList<Person>();
+        directory = new ArrayList<Person>();
+    }
+    
+    public Person newPerson(){
+        Person person = new Person();
+        directory.add(person);
+        return person;
+    }
+    
+        @Override
+    public String toString(){
+        String returnString = new String();
+        int i = 0;
+        for (Person person: directory){
+            returnString += "Patient "+i+":\n";
+            returnString += person;
+        }
+        
+        return returnString;
     }
     
 }

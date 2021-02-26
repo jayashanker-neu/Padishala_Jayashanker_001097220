@@ -19,7 +19,7 @@ public class driver {
         Patient patient = new Patient();
         initializePerson(patient);
         initializeEncounterVitalSigns(patient);
-        System.out.println("Encounter:\n"+patient.getEncounter());
+        System.out.println("Encounter:\n"+patient.getRecentEncounter());
 
         System.out.println("Patient condition is: "+(patient.isPatientNormal()?"Good":"Bad"));
         
@@ -59,7 +59,7 @@ public class driver {
                     break;
                 case 6:
                     System.out.println("\nPatient Name: "+patient.getName());
-                    System.out.println("Date of Birth: "+patient.getDob());
+                    System.out.println("Date of Birth: "+patient.getDOB());
                     System.out.println("Age Group: "+patient.getAgeGroup());
                     break;
                 default:

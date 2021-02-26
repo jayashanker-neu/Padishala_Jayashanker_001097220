@@ -17,7 +17,7 @@ class EncounterHistory {
     
     public EncounterHistory() {
         history = new ArrayList<Encounter>();
-    }
+    } 
 
     public ArrayList<Encounter> getHistory() {
         return history;
