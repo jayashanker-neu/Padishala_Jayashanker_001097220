@@ -20,6 +20,10 @@ public class PatientDirectory {
     public PatientDirectory() {
         this.directory = new ArrayList<Patient>();
     }
+
+    public ArrayList<Patient> getDirectory() {
+        return directory;
+    }
     
     public Patient newPatient() {
         Patient patient = new Patient();

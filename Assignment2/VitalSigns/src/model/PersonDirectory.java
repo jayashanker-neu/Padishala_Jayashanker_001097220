@@ -20,9 +20,14 @@ public class PersonDirectory {
     public PersonDirectory() {
         directory = new ArrayList<Person>();
     }
+
+    public ArrayList<Person> getDirectory() {
+        return directory;
+    }
     
     public Person newPerson(){
         Person person = new Person();
+        person.initialize();
         directory.add(person);
         return person;
     }
@@ -33,7 +38,8 @@ public class PersonDirectory {
         int i = 0;
         for (Person person: directory){
             returnString += "Patient "+i+":\n";
-            returnString += person;
+            returnString += person + "\n";
+            i++;
         }
         
         return returnString;

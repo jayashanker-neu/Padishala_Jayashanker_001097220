@@ -13,40 +13,21 @@ import java.util.ArrayList;
  * @author  Jayashanker Padishala
  * @NUID    001097220
  */
-public class House {
+public class House extends Community{
 
-    String number;
-    String street;
-    ArrayList<Person> people;
+    String houseNum;
     
-    public void addPerson(Person person){
-        people.add(person);
+    public String getHouseNum() {
+        return houseNum;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public ArrayList<Person> getPeople() {
-        return people;
-    }
-
-    public void setPeople(ArrayList<Person> people) {
-        this.people = people;
+    public void setHouseNum(String houseNum) {
+        this.houseNum = houseNum;
     }
     
-    
+    @Override
+    public String toString(){
+        return "\nHouse Number : " + this.houseNum + super.toString();
+    }
     
 }

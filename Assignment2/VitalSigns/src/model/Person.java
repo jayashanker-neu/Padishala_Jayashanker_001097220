@@ -15,30 +15,23 @@ import java.util.Scanner;
  * @author  Jayashanker Padishala
  * @NUID    001097220
  */
-public class Person {
+public class Person extends House{
 
     String firstName;
     String lastName;
-    String fullName;
     LocalDate dob;
     String ageGroup;
-    
-    Address address;
-    
-    String houseNo;
-    String street;
-    String community;
-    String city;
-    
-//    static PersonDirectory personDirectory;
 
     public Person(){
+        
+    }
+    
+    public void initialize() {
         System.out.println("\nEnter Person First Name: ");
         Scanner scanner = new Scanner(System.in);
         this.firstName = scanner.nextLine();
         System.out.println("\nEnter Person Last Name: ");
         this.lastName = scanner.nextLine();
-        this.fullName = firstName + " " + lastName;
         System.out.println("\nEnter DOB (YYYY-MM-DD): ");
         Boolean goodDate = false;
         while(!goodDate) {
@@ -52,20 +45,13 @@ public class Person {
         }
         
         System.out.println("Enter House No: ");
-        this.houseNo = scanner.nextLine();
-        
-        System.out.println("Enter Street: ");
-        this.street = scanner.nextLine();
+        this.houseNum = scanner.nextLine();
         
         System.out.println("Enter Community: ");
-        this.community = scanner.nextLine();
+        this.communityName = scanner.nextLine();
         
         System.out.println("Enter City: ");
-        this.city = scanner.nextLine();
-        
-        
-        
-        
+        this.cityName = scanner.nextLine();
     }
     
     public String getFirstName() {
@@ -82,6 +68,10 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public LocalDate getDOB() {
@@ -127,28 +117,11 @@ public class Person {
         this.lastName = scanner.nextLine();
         System.out.println("\nEnter Patient DOB: ");
         this.setDob(LocalDate.parse(scanner.nextLine()));
-    }
-    
-    public void setAddress(Address address){
-        this.address = address;
-    }
-    
-    public Address getAddress(){
-        return this.address;
-    }
-    
-    
-//    public static Person newPerson(){
-//        if (personDirectory == null)
-//            personDirectory = new PersonDirectory();
-//        Person person = new Person();
-//        personDirectory.directory.add(person);
-//        return person;
-//    }
-    
+    }    
         
     public String toString(){
-        return "\nName: " + this.fullName + "\nDOB: " + this.dob;
+        return "\nName: " + this.getFullName() + "\nDOB: " + this.dob + "(Age Group: " + this.ageGroup + ")"
+                + super.toString();
     }
     
 }

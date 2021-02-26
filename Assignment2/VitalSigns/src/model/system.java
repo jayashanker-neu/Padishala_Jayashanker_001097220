@@ -6,7 +6,7 @@
 
 package model;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -15,64 +15,302 @@ import java.util.ArrayList;
  */
 public class system {
     
-    static ArrayList<Address> addresses = new ArrayList<>();
+    static PersonDirectory personDirectory = new PersonDirectory();
+    static PatientDirectory patientDirectory = new PatientDirectory();
     
     public static void main(String args[]){
-        PersonDirectory personDirectory = new PersonDirectory();
-        Person person = personDirectory.newPerson();
-        System.out.println(person);
-        
-        person = personDirectory.newPerson();
-        System.out.println(person);
-        
-        System.out.println(personDirectory);
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do {
+            showMenu();
+            choice = scanner.nextInt();
+            
+            switch(choice) {
+                case 1:
+                    showAllPeopleMenu();
+                    break;
+                case 2:
+                    Person person = personDirectory.newPerson();
+                    System.out.println("\nPerson " + person.getFullName() + " is created successfully");
+                    break;
+                case 3:
+                    showAllPatientsMenu();
+                    break;
+                case 4:
+                    Patient patient = patientDirectory.newPatient();
+                    System.out.println("\nPatient " + patient.getFullName() + " is created successfully");
+                    break;
+                case 5:
+                    showAllCities();
+                    break;
+                case 6:
+                    showAllCommunities();
+                    break;
+                case 9:
+                    return;
+            }
+        }while(choice != 9);
         
     }
     
-    private void showMenu(){
+    private static void showMenu(){
         System.out.println("\nChoose one of the following options:");
         System.out.println(" 1. See all people");
-        System.out.println(" 2. See all patients");
-        System.out.println(" 3. ");
+        System.out.println(" 2. Add Person");
+        System.out.println(" 3. See all patients");
+        System.out.println(" 4. Add Patient");
+        System.out.println(" 5. See all Cities");
+        System.out.println(" 6. See all Communities");
+        System.out.println(" 9. Exit");
     }
     
-    private static Address findAddress(String houseNo, String street, String communityName, String cityName){
-        City city = null;
-        Community community = null;
-        House house = null;
-        Address personAddress;
-        Boolean addressFound = true;
-        for (Address address: addresses){
-            city = address.getCity(cityName);
-            if(city != null){
-                community = city.getCommunity(communityName);
-                if(community != null){
-                    house = community.getHouse(houseNo, street);
-                    if(house == null) {
-                        house = new House();
-                        addressFound = false;
-                    }
-                }
-                else {
-                    community = new Community();
-                    house = new House();
-                    addressFound = false;
-                }
-            }
-            else {
-                
-                city = new City();
-                community = new Community();
-                house = new House();
-                addressFound = false;
-                
-            }
+    private static void showAllCities(){
+        int i = 1;
+        int choice;
+        String selectedCity;
+        Scanner scanner = new Scanner(System.in);
+        for(Person person: personDirectory.getDirectory()){
+            System.out.printf("%3d. %s\n",i,person.getCityName());
+            i++;
         }
-        if(!addressFound){
-            personAddress = new Address(city, community, house);
-            addAddress(personAddress);
-        }
-        return personAddress;
+        System.out.println("\nChoose one of the cities to get into details: ");
+        choice = scanner.nextInt();
+        selectedCity = personDirectory.directory.get(choice - 1).getCityName();
+        showSelectedCity(selectedCity);
     }
+    
+    private static void showAllCommunities(){
+        int i = 1;
+        int choice;
+        String selectedCommunity;
+        Scanner scanner = new Scanner(System.in);
+        for(Person person: personDirectory.getDirectory()){
+            System.out.printf("%3d. %s\n",i,person.getCityName());
+            i++;
+        }
+        System.out.println("\nChoose one of the cities to get into details: ");
+        choice = scanner.nextInt();
+        selectedCommunity = personDirectory.directory.get(choice - 1).getCommunityName();
+        showSelectedCommunity(selectedCommunity, personDirectory.directory.get(choice - 1).getCityName());
+    }
+    
+    private static void showAllPeopleMenu(){
+        
+        int i = 1;
+        int choice;
+        if(personDirectory.getDirectory().size() == 0) {
+            System.out.println("\nNo people created yet.");
+            return;
+        }
+            
+        Person selectedPerson;
+        Scanner scanner = new Scanner(System.in);
+        for(Person person: personDirectory.getDirectory()){
+            System.out.printf("%3d. %s\n",i,person.getFullName());
+            i++;
+        }
+        System.out.println("\nChoose one of the person to get into details\nOR type something to go back to previous menu: ");
+        choice = scanner.nextInt();
+        selectedPerson = personDirectory.directory.get(choice - 1);
+        showSelectedPerson(selectedPerson);
+    }
+    
+    private static void showSelectedPerson(Person person){
+        System.out.println(person);
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        if(person instanceof Patient){
+            System.out.println("\nThis person has visited the hospital");
+            patientMenu((Patient)person);
+            
+//            System.out.println("\n");
+//            System.out.println(" 1. See the details of Encounters?\n 2. Main Menu");
+//            choice = scanner.nextInt();
+//            if(choice == 1)
+//                printPatient((Patient)person);
+        }
+        else {
+            System.out.println("\nThis person has never met a doctor");
+            System.out.println("Would you like to add a visit to hospital for this person?");
+            System.out.println(" 1. Yes\n 2. No (Main Menu)");
+            choice = scanner.nextInt();
+            if(choice == 1)
+                person = addVisit(person);
+        }
+    }
+    
+    private static void patientMenu(Patient patient) {
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
+            System.out.println("Choose one option from below for "+patient.getName());
+            System.out.println("   1. Get DOB and Address");
+            System.out.println("   2. Get Hospital Visits (Date and time)");
+            System.out.println("   3. Get Vital Signs from recent Hospital Visit");
+            System.out.println("   4. Get Vital Signs from all Hospital Visits");
+            System.out.println("   5. Check if all Vital Signs are Normal");
+            System.out.println("   6. Check if the given Vital Sign is Normal");
+            System.out.println("   9. Go to Previous Menu");
+            choice = scanner.nextInt();
+            switch(choice){
+                case 1:
+                    System.out.println((Person)patient);
+                    break;
+                case 2:
+                    int i = 1;
+                    for(Encounter encounter: patient.getEncounterHistory().getHistory()) {
+                        System.out.printf("%3d. %s",i,encounter.getEncounterDatetime());
+                        i++;
+                    }
+                    System.out.printf("%3d. %s",i,patient.getEncounter().getEncounterDatetime());
+                    break;
+                case 3:
+                    System.out.println(patient.getEncounter());
+                    break;
+                case 4:
+                    patient.getEncounterHistory().printHistory();
+                    System.out.println("Latest Visit: ");
+                    System.out.println(patient.getEncounter());
+                    break;
+                case 5:
+                    if(patient.isPatientNormal())
+                        System.out.println("Patient Vital Signs are in Normal Condition");
+                    else
+                        System.out.println("Patient Vital Signs are Abnormal");
+                    break;
+                case 6:
+                    System.out.print("\nAvailable Values of VitalSigns\n"
+                                + "\tRespiratory Rate\n"
+                                + "\tHeart Rate\n"
+                                + "\tSystolicBP\n"
+                                + "\tWeight\n"
+                                + "\nEnter the VitalSign Name: ");
+                    String condition = scanner.nextLine();
+                    if(patient.isThisVitalSignNormal(condition)) 
+                        System.out.println(condition+" for "+patient.getName()+" is Normal");
+                    else
+                        System.out.println(condition+" for "+patient.getName()+" is not good");
+                    break;
+                case 9:
+                    return;
+            }
+        }
+    }
+    
+    private static void showAllPatientsMenu(){
+        
+        int i = 1;
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        Patient selectedPatient;
+        for(Patient patient: patientDirectory.getDirectory()){
+            System.out.printf("%3d. %s\n",i,patient.getFullName());
+            i++;
+        }
+        System.out.println("\nChoose one of the person to get into details: ");
+        choice = scanner.nextInt();
+        selectedPatient = patientDirectory.getDirectory().get(choice - 1);
+        patientMenu(selectedPatient);
+    }
+
+    private static void printPatient(Patient patient) {
+        System.out.println("Encounter History of "+patient.getName()+":");
+        patient.getEncounterHistory().printHistory();
+        System.out.println("\nLatest Encounter Details: ");
+        System.out.println(patient.getEncounter());
+    }
+
+    private static Patient addVisit(Person person) {
+        Patient patient = null;
+        if (person instanceof Patient) {
+            patient = (Patient)person;
+            patient.newEncounter();
+        }
+        else {
+            patient = new Patient(person);
+            personDirectory.getDirectory().remove(person);
+        }
+        return patient;
+    }
+
+    private static void showSelectedCommunity(String selectedCommunity, String selectedCity) {
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
+            int good = 0;
+            int bad = 0;
+            System.out.println("\nChoose one of the following:\n");
+            System.out.println(" 1. Show count of patients with good and bad overall Vital Signs");
+            System.out.println(" 2. Show count of normal and abnormal patients with given vitalSign");
+            System.out.println(" 3. Go to previous menu");
+            int choice = scanner.nextInt();
+            switch(choice){
+                case 1:
+                    for(Patient patient: patientDirectory.getDirectory()) {
+                        if(patient.isPatientNormal() && patient.getCommunityName().equals(selectedCommunity)
+                                && patient.getCityName().equals(selectedCity))
+                            good++;
+                        else
+                            bad++;
+                    }
+                    System.out.println("Patients with Normal Condition: "+good);
+                    System.out.println("Patients with abormal Condition: "+bad);
+                    break;
+                case 2:
+                    System.out.println("\nEnter the Vital Sign Name to check: ");
+                    String condition = scanner.nextLine();
+                    for(Patient patient: patientDirectory.getDirectory()) {
+                        if(patient.isThisVitalSignNormal(condition))
+                            good++;
+                        else
+                            bad++;
+                    }
+                    System.out.println("Patients with Normal "+condition + " :"+good);
+                    System.out.println("Patients with abormal "+condition + " :"+bad);
+                    break;
+                case 3:
+                    return;
+            }
+        }
+    }
+    
+    private static void showSelectedCity(String selectedCity) {
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
+            int good = 0;
+            int bad = 0;
+            System.out.println("\nChoose one of the following:\n");
+            System.out.println(" 1. Show count of patients with good and bad overall Vital Signs");
+            System.out.println(" 2. Show count of normal and abnormal patients with given vitalSign");
+            System.out.println(" 3. Go to previous menu");
+            int choice = scanner.nextInt();
+            switch(choice){
+                case 1:
+                    for(Patient patient: patientDirectory.getDirectory()) {
+                        if(patient.isPatientNormal() && patient.getCityName().equals(selectedCity))
+                            good++;
+                        else
+                            bad++;
+                    }
+                    System.out.println("Patients with Normal Condition: "+good);
+                    System.out.println("Patients with abormal Condition: "+bad);
+                    break;
+                case 2:
+                    System.out.println("\nEnter the Vital Sign Name to check: ");
+                    String condition = scanner.nextLine();
+                    for(Patient patient: patientDirectory.getDirectory()) {
+                        if(patient.isThisVitalSignNormal(condition))
+                            good++;
+                        else
+                            bad++;
+                    }
+                    System.out.println("Patients with Normal "+condition + " :"+good);
+                    System.out.println("Patients with abormal "+condition + " :"+bad);
+                    break;
+                case 3:
+                    return;
+            }
+        }
+    }
+    
 
 }

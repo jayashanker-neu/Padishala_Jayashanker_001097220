@@ -15,37 +15,19 @@ import java.util.ArrayList;
  */
 public class City {
 
-    String name;
-    ArrayList<Community> communities;
-    
-    public void addCity(Community community){
-        communities.add(community);
-    }
-    
-    public Community getCommunity(String communityName){
-        if(this.communities != null)
-            for(Community community: communities)
-                if(community.getName().equals(communityName))
-                    return community;
-        return null;
+    String cityName;
+
+    public String getCityName() {
+        return cityName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Community> getCommunities() {
-        return communities;
-    }
-
-    public void setCommunities(ArrayList<Community> communities) {
-        this.communities = communities;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
     
-    
+    @Override
+    public String toString(){
+        return "\nCity : " + this.cityName;
+    }
     
 }

@@ -15,6 +15,20 @@ public class Patient extends Person{
     EncounterHistory encounterHistory;
     Boolean isPatientNormal;
     
+    Patient(){
+        
+    }
+    
+    Patient(Person person) {
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.ageGroup = person.getAgeGroup();
+        this.dob = person.getDOB();
+        this.houseNum = person.getHouseNum();
+        this.communityName = person.getCommunityName();
+        this.cityName = person.getCityName();
+    }
+    
     public Boolean isPatientNormal(){
         return encounter.getVitalSigns().areVitalSignsNormal(this);
     }
@@ -28,11 +42,7 @@ public class Patient extends Person{
     }
     
     public String getName() {
-        return fullName;
-    }
-
-    public void setName(String Name) {
-        this.fullName = Name;
+        return getFullName();
     }
 
     public void setEncounter(Encounter encounter) {
@@ -58,6 +68,14 @@ public class Patient extends Person{
 
     VitalSigns getVitalSigns() {
         return this.getRecentEncounter().getVitalSigns();
+    }
+
+    public Encounter getEncounter() {
+        return encounter;
+    }
+
+    public Boolean getIsPatientNormal() {
+        return isPatientNormal;
     }
 
     void setVitalSigns(VitalSigns vitalSigns) {
