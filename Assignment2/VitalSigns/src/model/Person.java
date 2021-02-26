@@ -27,31 +27,8 @@ public class Person extends House{
     }
     
     public void initializePerson() {
-        System.out.println("\nEnter Person First Name: ");
         Scanner scanner = new Scanner(System.in);
-        this.firstName = scanner.nextLine();
-        System.out.println("\nEnter Person Last Name: ");
-        this.lastName = scanner.nextLine();
-        System.out.println("\nEnter DOB (YYYY-MM-DD): ");
-        Boolean goodDate = false;
-        while(!goodDate) {
-            try {
-                this.setDob(LocalDate.parse(scanner.nextLine()));
-                goodDate = true;
-                if(Period.between(dob, LocalDate.now()).getDays() < 0 ||
-                        Period.between(dob, LocalDate.now()).getMonths() < 0 ||
-                        Period.between(dob, LocalDate.now()).getYears() < 0)
-                {
-                    System.out.println("\nWhy are you like this? Enter the past date not future.");
-                    System.out.print("Enter DOB in correct format (YYYY-MM-DD): ");
-                    goodDate = false;
-                }
-            }
-            catch (Exception e) {
-                System.out.print("\nEnter DOB in correct format (YYYY-MM-DD): ");
-            }
-        }
-        
+        updateInfo();
         System.out.println("Enter House No: ");
         this.houseNum = scanner.nextLine();
         
@@ -118,13 +95,30 @@ public class Person extends House{
     }
     
     void updateInfo() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\nEnter Person First Name: ");
+        Scanner scanner = new Scanner(System.in);
         this.firstName = scanner.nextLine();
         System.out.println("\nEnter Person Last Name: ");
         this.lastName = scanner.nextLine();
-        System.out.println("\nEnter Patient DOB: ");
-        this.setDob(LocalDate.parse(scanner.nextLine()));
+        System.out.println("\nEnter DOB (YYYY-MM-DD): ");
+        Boolean goodDate = false;
+        while(!goodDate) {
+            try {
+                this.setDob(LocalDate.parse(scanner.nextLine()));
+                goodDate = true;
+                if(Period.between(dob, LocalDate.now()).getDays() < 0 ||
+                        Period.between(dob, LocalDate.now()).getMonths() < 0 ||
+                        Period.between(dob, LocalDate.now()).getYears() < 0)
+                {
+                    System.out.println("\nWhy are you like this? Enter the past date not future.");
+                    System.out.print("Enter DOB in correct format (YYYY-MM-DD): ");
+                    goodDate = false;
+                }
+            }
+            catch (Exception e) {
+                System.out.print("\nEnter DOB in correct format (YYYY-MM-DD): ");
+            }
+        }
     }    
         
     public String toString(){
