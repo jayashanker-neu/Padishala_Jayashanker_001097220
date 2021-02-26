@@ -243,7 +243,7 @@ public class VitalSigns {
 //                break;
 //        }
         
-        return false;
+        return null;
     }
     
 }

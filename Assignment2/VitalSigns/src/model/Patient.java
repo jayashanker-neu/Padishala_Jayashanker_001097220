@@ -16,7 +16,7 @@ public class Patient extends Person{
     Boolean isPatientNormal;
     
     Patient(){
-        
+        this.encounterHistory = new EncounterHistory();
     }
     
     Patient(Person person) {
@@ -27,6 +27,7 @@ public class Patient extends Person{
         this.houseNum = person.getHouseNum();
         this.communityName = person.getCommunityName();
         this.cityName = person.getCityName();
+        this.encounterHistory = new EncounterHistory();
     }
     
     public Boolean isPatientNormal(){

@@ -27,7 +27,7 @@ public class PersonDirectory {
     
     public Person newPerson(){
         Person person = new Person();
-        person.initialize();
+        person.initializePerson();
         directory.add(person);
         return person;
     }

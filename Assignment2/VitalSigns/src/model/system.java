@@ -38,6 +38,8 @@ public class system {
                     break;
                 case 4:
                     Patient patient = patientDirectory.newPatient();
+                    personDirectory.getDirectory().add(patient);
+                    patient.newEncounter();
                     System.out.println("\nPatient " + patient.getFullName() + " is created successfully");
                     break;
                 case 5:
@@ -73,10 +75,15 @@ public class system {
             System.out.printf("%3d. %s\n",i,person.getCityName());
             i++;
         }
-        System.out.println("\nChoose one of the cities to get into details: ");
-        choice = scanner.nextInt();
-        selectedCity = personDirectory.directory.get(choice - 1).getCityName();
-        showSelectedCity(selectedCity);
+        System.out.println("\nChoose one of the cities to get into details\nOR type something to go back to previous menu: : ");
+        try {
+            choice = scanner.nextInt();
+            selectedCity = personDirectory.directory.get(choice - 1).getCityName();
+            showSelectedCity(selectedCity);
+        }
+        catch(Exception e){
+            System.out.println("Going to previous menu\n");
+        }
     }
     
     private static void showAllCommunities(){
@@ -85,20 +92,26 @@ public class system {
         String selectedCommunity;
         Scanner scanner = new Scanner(System.in);
         for(Person person: personDirectory.getDirectory()){
-            System.out.printf("%3d. %s\n",i,person.getCityName());
+            System.out.printf("%3d. %s\n",i,person.getCommunityName());
             i++;
         }
-        System.out.println("\nChoose one of the cities to get into details: ");
-        choice = scanner.nextInt();
-        selectedCommunity = personDirectory.directory.get(choice - 1).getCommunityName();
-        showSelectedCommunity(selectedCommunity, personDirectory.directory.get(choice - 1).getCityName());
+        System.out.println("\nChoose one of the communities to get into details\nOR type something to go back to previous menu: : ");
+        try {
+            choice = scanner.nextInt();
+            selectedCommunity = personDirectory.directory.get(choice - 1).getCommunityName();
+            showSelectedCommunity(selectedCommunity, personDirectory.directory.get(choice - 1).getCityName());
+        }
+        catch(Exception e){
+            System.out.println("Going to previous menu\n");
+        }
+        
     }
     
     private static void showAllPeopleMenu(){
         
         int i = 1;
         int choice;
-        if(personDirectory.getDirectory().size() == 0) {
+        if(personDirectory.getDirectory().isEmpty()) {
             System.out.println("\nNo people created yet.");
             return;
         }
@@ -110,9 +123,14 @@ public class system {
             i++;
         }
         System.out.println("\nChoose one of the person to get into details\nOR type something to go back to previous menu: ");
-        choice = scanner.nextInt();
-        selectedPerson = personDirectory.directory.get(choice - 1);
-        showSelectedPerson(selectedPerson);
+        try {
+            choice = scanner.nextInt();
+            selectedPerson = personDirectory.directory.get(choice - 1);
+            showSelectedPerson(selectedPerson);
+        }
+        catch(Exception e){
+            System.out.println("Going to previous menu\n");
+        }
     }
     
     private static void showSelectedPerson(Person person){
@@ -158,10 +176,13 @@ public class system {
                     break;
                 case 2:
                     int i = 1;
-                    for(Encounter encounter: patient.getEncounterHistory().getHistory()) {
-                        System.out.printf("%3d. %s",i,encounter.getEncounterDatetime());
-                        i++;
-                    }
+                    if(patient.getEncounterHistory().getHistory().size() == 0)
+                        System.out.println("Patient has only 1 visit\n");
+                    else 
+                        for(Encounter encounter: patient.getEncounterHistory().getHistory()) {
+                            System.out.printf("%3d. %s",i,encounter.getEncounterDatetime());
+                            i++;
+                        }
                     System.out.printf("%3d. %s",i,patient.getEncounter().getEncounterDatetime());
                     break;
                 case 3:
@@ -185,10 +206,11 @@ public class system {
                                 + "\tSystolicBP\n"
                                 + "\tWeight\n"
                                 + "\nEnter the VitalSign Name: ");
+                    scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
                     if(patient.isThisVitalSignNormal(condition)) 
                         System.out.println(condition+" for "+patient.getName()+" is Normal");
-                    else
+                    else if(!patient.isThisVitalSignNormal(condition))
                         System.out.println(condition+" for "+patient.getName()+" is not good");
                     break;
                 case 9:
@@ -199,6 +221,11 @@ public class system {
     
     private static void showAllPatientsMenu(){
         
+        if(patientDirectory.getDirectory().isEmpty()) {
+            System.out.println("There are no patients created.\nReturning to previous menu.");
+            return;
+        }
+        
         int i = 1;
         int choice;
         Scanner scanner = new Scanner(System.in);
@@ -207,10 +234,15 @@ public class system {
             System.out.printf("%3d. %s\n",i,patient.getFullName());
             i++;
         }
-        System.out.println("\nChoose one of the person to get into details: ");
-        choice = scanner.nextInt();
-        selectedPatient = patientDirectory.getDirectory().get(choice - 1);
-        patientMenu(selectedPatient);
+        System.out.println("\nChoose one of the patient to get into details\nOR type something to go back to previous menu: : ");
+        try {
+            choice = scanner.nextInt();
+            selectedPatient = patientDirectory.getDirectory().get(choice - 1);
+            patientMenu(selectedPatient);
+        }
+        catch(Exception e) {
+            System.out.println("Going to previous menu\n");
+        }
     }
 
     private static void printPatient(Patient patient) {
@@ -228,7 +260,10 @@ public class system {
         }
         else {
             patient = new Patient(person);
+            patientDirectory.getDirectory().add(patient);
             personDirectory.getDirectory().remove(person);
+            personDirectory.getDirectory().add(patient);
+            patient.newEncounter();
         }
         return patient;
     }
@@ -243,6 +278,7 @@ public class system {
             System.out.println(" 2. Show count of normal and abnormal patients with given vitalSign");
             System.out.println(" 3. Go to previous menu");
             int choice = scanner.nextInt();
+            scanner = new Scanner(System.in);
             switch(choice){
                 case 1:
                     for(Patient patient: patientDirectory.getDirectory()) {

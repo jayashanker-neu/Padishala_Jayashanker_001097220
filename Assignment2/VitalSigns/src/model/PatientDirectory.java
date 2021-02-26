@@ -28,6 +28,7 @@ public class PatientDirectory {
     public Patient newPatient() {
         Patient patient = new Patient();
         directory.add(patient);
+        patient.initializePerson();
         return patient;
     }
     

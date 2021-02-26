@@ -26,7 +26,7 @@ public class Person extends House{
         
     }
     
-    public void initialize() {
+    public void initializePerson() {
         System.out.println("\nEnter Person First Name: ");
         Scanner scanner = new Scanner(System.in);
         this.firstName = scanner.nextLine();
