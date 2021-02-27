@@ -58,6 +58,10 @@ public class system {
                     scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
                     allCommunities = showAllCommunities(false);
+                    if(allCommunities.isEmpty()) {
+                        System.out.println("There is no data.\nReturning to main menu.");
+                        return;
+                    }
                     Boolean vitalSignExists = true;
                     for (Community community: allCommunities) {
                         for(Patient p: patientDirectory.getDirectory()) {
