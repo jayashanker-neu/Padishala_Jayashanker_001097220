@@ -131,6 +131,10 @@ public class system {
         String selectedCity;
         Scanner scanner = new Scanner(System.in);
         ArrayList<City> allCities = showAllCities(true);
+        if(allCities.isEmpty()) {
+            System.out.println("There is no data to show.\nReturning to previous menu.");
+            return;
+        }
         System.out.println("\nChoose one of the cities to get into details\nOR type something to go back to previous menu: : ");
         try {
             choice = scanner.nextInt();
@@ -175,6 +179,10 @@ public class system {
         String selectedCommunity;
         Scanner scanner = new Scanner(System.in);
         ArrayList<Community> allCommunities = showAllCommunities(true);
+        if(allCommunities.isEmpty()) {
+            System.out.println("There is no data.\nReturning to previous menu.");
+            return;
+        }
         System.out.println("\nChoose one of the communities to get into details\nOR type something to go back to previous menu: : ");
         try {
             choice = scanner.nextInt();
