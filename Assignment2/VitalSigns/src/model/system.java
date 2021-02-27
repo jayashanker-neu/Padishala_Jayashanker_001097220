@@ -61,8 +61,8 @@ public class system {
                     Boolean vitalSignExists = true;
                     for (Community community: allCommunities) {
                         for(Patient p: patientDirectory.getDirectory()) {
-                            if(!p.getCommunityName().equals(community.getCommunityName()) ||
-                                    !p.getCityName().equals(community.getCityName()))
+                            if(!p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) ||
+                                    !p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
                                 continue;
                             if(p.isThisVitalSignNormal(condition) == null){
                                 System.out.println("Vital Sign does not exist.\n");
@@ -107,7 +107,7 @@ public class system {
             }
             else {
                 for(City city: distinctCities) {
-                    if(p.getCityName().equals(city.getCityName()))
+                    if(p.getCityName().toLowerCase().equals(city.getCityName().toLowerCase()))
                         continue;
                     else
                         distinctCities.add((City)p);
@@ -150,8 +150,8 @@ public class system {
             }
             else {
                 for(Community community: distinctCommunities) {
-                    if(p.getCommunityName().equals(community.getCommunityName()) && 
-                            p.getCityName().equals(community.getCityName()))
+                    if(p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) && 
+                            p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
                         continue;
                     else
                         distinctCommunities.add((Community)p);
@@ -366,8 +366,8 @@ public class system {
             switch(choice){
                 case 1:
                     for(Patient patient: patientDirectory.getDirectory()) {
-                        if(patient.isPatientNormal() && patient.getCommunityName().equals(selectedCommunity)
-                                && patient.getCityName().equals(selectedCity))
+                        if(patient.isPatientNormal() && patient.getCommunityName().toLowerCase().equals(selectedCommunity.toLowerCase())
+                                && patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
                             good++;
                         else
                             bad++;
@@ -407,7 +407,7 @@ public class system {
             switch(choice){
                 case 1:
                     for(Patient patient: patientDirectory.getDirectory()) {
-                        if(patient.isPatientNormal() && patient.getCityName().equals(selectedCity))
+                        if(patient.isPatientNormal() && patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
                             good++;
                         else
                             bad++;
