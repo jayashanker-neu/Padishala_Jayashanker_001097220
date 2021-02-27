@@ -376,6 +376,12 @@ public class system {
                     System.out.println("Patients with abormal Condition: "+bad);
                     break;
                 case 2:
+                    System.out.println("\nAvailable Values of VitalSigns\n"
+                                + "\tRespiratory Rate\n"
+                                + "\tHeart Rate\n"
+                                + "\tSystolicBP\n"
+                                + "\tWeight\n"
+                                + "\nEnter the VitalSign Name: ");
                     System.out.println("\nEnter the Vital Sign Name to check: ");
                     scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
