@@ -216,7 +216,7 @@ public class system {
         int choice;
         String selectedCommunity;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Community> allCommunities = showAllCommunities(true);
+        ArrayList<Community> allCommunities = showAllCommunities(false);
         if(allCommunities.isEmpty()) {
             System.out.println("There is no data.\nReturning to previous menu.");
             return;
