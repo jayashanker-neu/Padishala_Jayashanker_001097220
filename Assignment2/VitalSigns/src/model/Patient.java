@@ -66,6 +66,15 @@ public class Patient extends Person{
         encounter.vitalSigns.setAreVitalSignsNormal(this.isPatientNormal);
         return this.encounter;
     }
+    
+    public Encounter newEncounter(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos){
+        if (this.encounter != null)
+            this.encounterHistory.getHistory().add(this.encounter);
+        this.encounter = new Encounter(respiratoryRate, heartRate, systolicBP, weightInKilos);
+        this.isPatientNormal = this.isPatientNormal();
+        encounter.vitalSigns.setAreVitalSignsNormal(this.isPatientNormal);
+        return this.encounter;
+    }
 
     VitalSigns getVitalSigns() {
         return this.getRecentEncounter().getVitalSigns();

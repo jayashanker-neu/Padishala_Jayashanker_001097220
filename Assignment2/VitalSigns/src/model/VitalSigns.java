@@ -20,11 +20,6 @@ public class VitalSigns {
     double weightInPounds;
     Boolean areVitalSignsNormal;
     
-//    Boolean isRespiratoryRateNormal;
-//    Boolean isHeartRateNormal;
-//    Boolean isSystolicBPNormal;
-//    Boolean isWeightNormal;
-    
     public VitalSigns(){
         Boolean good = false;
         Scanner scanner = new Scanner(System.in);
@@ -32,10 +27,13 @@ public class VitalSigns {
             try {
                 scanner = new Scanner(System.in);
                 System.out.println("\nEnter following Vital Sign Details: \n");
-                System.out.println("RespiratoryRate\t\tHeartRate\tSystolicBP\tWeightInKilos");
+                System.out.print("RespiratoryRate:- ");
                 this.respiratoryRate = scanner.nextDouble();
+                System.out.println("HeartRate:- ");
                 this.heartRate = scanner.nextDouble();
+                System.out.println("SystolicBP:- ");
                 this.systolicBP = scanner.nextDouble();
+                System.out.println("WeightInKilos:- ");
                 this.weightInKilos = scanner.nextDouble();
                 this.weightInPounds = this.weightInKilos * 2.20462262;
                 good = true;
@@ -47,13 +45,15 @@ public class VitalSigns {
 //        this.vitalSignDatetime = LocalDateTime.now();
     }
     
+    
     public VitalSigns(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) { //, double weightInPounds){
-        this.respiratoryRate = respiratoryRate;
-        this.heartRate = heartRate;
-        this.systolicBP = systolicBP;
-        this.weightInKilos = weightInKilos;
-        this.weightInPounds = weightInKilos * 2.20462262;
+//        this.respiratoryRate = respiratoryRate;
+//        this.heartRate = heartRate;
+//        this.systolicBP = systolicBP;
+//        this.weightInKilos = weightInKilos;
+//        this.weightInPounds = weightInKilos * 2.20462262;
 //        this.vitalSignDatetime = LocalDateTime.now();
+        this.updateVitalSigns(respiratoryRate, heartRate, systolicBP, weightInKilos);
         
     }
     
@@ -238,21 +238,6 @@ public class VitalSigns {
             return isWeightNormal(patient);
         else
             System.out.println("Given Vital Sign details are not found.\n");
-        
-//        switch (vitalSign) {
-//            case "Respiratory Rate":
-//                return isRespiratoryRateNormal(patient);
-//            case "Heart Rate":
-//                return isHeartRateNormal(patient);
-//            case "SystolicBP":
-//                return isSystolicBPNormal(patient);
-//            case "Weight":
-//                return isWeightNormal(patient);
-//            default:
-//                System.out.println("Given Vital Sign details are not found.\n");
-//                break;
-//        }
-        
         return null;
     }
     

@@ -23,6 +23,11 @@ public class Encounter {
         this.vitalSigns = new VitalSigns();
         this.encounterDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
     }
+    
+    public Encounter(double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) {
+        this.vitalSigns = new VitalSigns(respiratoryRate, heartRate, systolicBP, weightInKilos);
+        this.encounterDatetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
+    }
 
     public VitalSigns getVitalSigns() {
         return vitalSigns;

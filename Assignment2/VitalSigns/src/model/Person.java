@@ -39,6 +39,14 @@ public class Person extends House{
         this.cityName = scanner.nextLine();
     }
     
+    public void initializePerson(String firstName, String lastName, String dob, String houseNum, String communityName, String cityName) {
+        
+        updateInfo(firstName, lastName, dob);
+        this.houseNum = houseNum;
+        this.communityName = communityName;
+        this.cityName = cityName;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -119,6 +127,14 @@ public class Person extends House{
                 System.out.print("\nEnter DOB in correct format (YYYY-MM-DD): ");
             }
         }
+    }
+
+    void updateInfo(String firstName, String lastName, String dob) {
+        
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.setDob(LocalDate.parse(dob));
+        
     }    
         
     public String toString(){

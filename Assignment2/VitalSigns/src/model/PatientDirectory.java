@@ -32,6 +32,15 @@ public class PatientDirectory {
         return patient;
     }
     
+    public Patient newPatient(String firstName, String lastName, String dob, String houseNum, String communityName, String cityName,
+            double respiratoryRate, double heartRate, double systolicBP, double weightInKilos) {
+        Patient patient = new Patient();
+        directory.add(patient);
+        patient.initializePerson(firstName, lastName, dob, houseNum, communityName, cityName);
+        patient.newEncounter(respiratoryRate, heartRate, systolicBP, weightInKilos);
+        return patient;
+    }
+    
     @Override
     public String toString(){
         String returnString = new String();

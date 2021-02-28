@@ -21,7 +21,10 @@ public class system {
     static PersonDirectory personDirectory = new PersonDirectory();
     static PatientDirectory patientDirectory = new PatientDirectory();
     
-    public static void main(String args[]) throws Throwable{
+    public static void main(String args[]) {
+        
+        addFixedData();
+        
         Scanner scanner = new Scanner(System.in);
         int choice;
         do {
@@ -54,16 +57,23 @@ public class system {
                 case 7:
                     ArrayList<Community> allCommunities;
                     int good = 0, bad = 0;
-                    allCommunities = showAllCommunities(false);
+                    allCommunities = showAllCommunities(true);
                     if(allCommunities.isEmpty()) {
                         System.out.println("There is no data.\nReturning to main menu.");
                         break;
                     }
+                    System.out.print("\nAvailable Values of VitalSigns\n"
+                                + "\tRespiratory Rate\n"
+                                + "\tHeart Rate\n"
+                                + "\tSystolicBP\n"
+                                + "\tWeight");
                     System.out.println("\nEnter the Vital Sign Name to check: ");
                     scanner = new Scanner(System.in);
                     String condition = scanner.nextLine();
                     Boolean vitalSignExists = true;
                     for (Community community: allCommunities) {
+                        good = 0;
+                        bad = 0;
                         for(Patient p: patientDirectory.getDirectory()) {
                             if(!p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) ||
                                     !p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
@@ -108,6 +118,7 @@ public class system {
         int personCount = 0;
         while(personCount != personDirectory.getDirectory().size()) {
             personCount = 0;
+            Boolean found = false;
             try {
                 for(Person p: personDirectory.getDirectory()) {
                     if(distinctCities.isEmpty()) {
@@ -115,11 +126,14 @@ public class system {
                     }
                     else {
                         for(City city: distinctCities) {
-                            if(p.getCityName().toLowerCase().equals(city.getCityName().toLowerCase()))
-                                continue;
-                            else
-                                distinctCities.add((City)p);
+                            found = false;
+                            if(p.getCityName().toLowerCase().equals(city.getCityName().toLowerCase())){
+                                found = true;
+                                break;
+                            }
                         }
+                        if(!found)
+                            distinctCities.add((City)p);
                     }
                     personCount++;
                 }
@@ -163,6 +177,7 @@ public class system {
         int personCount = 0;
         while(personCount != personDirectory.getDirectory().size()) {
             personCount = 0;
+            Boolean found = false;
             try {
                 for(Person p: personDirectory.getDirectory()) {
                     if(distinctCommunities.isEmpty()) {
@@ -170,12 +185,15 @@ public class system {
                     }
                     else {
                         for(Community community: distinctCommunities) {
+                            found = false;
                             if(p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) && 
-                                    p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
-                                continue;
-                            else
-                                distinctCommunities.add((Community)p);
+                                    p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase())) {
+                                found = true;
+                                break;
+                            }
                         }
+                        if(!found)
+                            distinctCommunities.add((Community)p);
                     }
                     personCount++;
                 }
@@ -212,7 +230,6 @@ public class system {
         catch(Exception e){
             System.out.println("Going to previous menu\n");
         }
-        
     }
     
     private static void showAllPeopleMenu(){
@@ -248,12 +265,6 @@ public class system {
         if(person instanceof Patient){
             System.out.println("\nThis person has visited the hospital");
             patientMenu((Patient)person);
-            
-//            System.out.println("\n");
-//            System.out.println(" 1. See the details of Encounters?\n 2. Main Menu");
-//            choice = scanner.nextInt();
-//            if(choice == 1)
-//                printPatient((Patient)person);
         }
         else {
             System.out.println("\nThis person has never met a doctor");
@@ -470,6 +481,57 @@ public class system {
                     return;
             }
         }
+    }
+    
+    public static void addFixedData() {
+        // Adolescent -- All Good
+        patientDirectory.newPatient("jay1", "p", "1996-08-09", "15", "berkley", "gloversville", 13, 56, 115, 60);
+        
+        // Adolescent -- All bad
+        patientDirectory.newPatient("jay2", "p", "1996-08-09", "15", "anarbor", "virginia", 10, 10, 10, 10);
+        
+        // New Born
+        patientDirectory.newPatient("jay3", "p", "2020-03-01", "15", "charlotte", "north carolina", 35, 125, 56, 2.5);
+        
+        // New Born
+        patientDirectory.newPatient("jay4", "p", "2020-03-01", "15", "delmar", "west virginia", 55, 155, 55, 3.5);
+        
+        // Infant
+        patientDirectory.newPatient("jay5", "p", "2020-02-01", "15", "berkley", "gloversville", 25, 85, 75, 5.5);
+        
+        // Infant
+        patientDirectory.newPatient("jay6", "p", "2020-02-01", "15", "anarbor", "virginia", 35, 155, 69, 4.5);
+        
+        // Toddler
+        patientDirectory.newPatient("jay7", "p", "2019-08-09", "15", "charlotte", "north carolina", 25, 85, 85, 12);
+        
+        // Toddler
+        patientDirectory.newPatient("jay8", "p", "2019-08-09", "15", "delmar", "west virginia", 35, 35, 50, 5);
+        
+        // Preschool
+        patientDirectory.newPatient("jay9", "p", "2017-08-09", "15", "anarbor", "virginia", 35, 95, 95, 13);
+        
+        // Preschool
+        patientDirectory.newPatient("jay10", "p", "2017-08-09", "15", "berkley", "gloversville", 25, 85, 95, 13);
+        
+        // School Age
+        patientDirectory.newPatient("jay11", "p", "2011-08-09", "15", "mission main", "boston", 35, 65, 75, 25);
+        
+        // School Age
+        patientDirectory.newPatient("jay12", "p", "2011-08-09", "15", "anarbor", "virginia", 25, 76, 86, 29);
+        
+        // Adolescent 
+        patientDirectory.newPatient("jay13", "p", "1996-08-09", "15", "mission main", "boston", 30, 100, 115, 60);
+        
+        // Adolescent 
+        patientDirectory.newPatient("jay14", "p", "1996-08-09", "15", "charlotte", "north carolina", 15, 80, 115, 70);
+        
+        // Adolescent 
+        patientDirectory.newPatient("jay15", "p", "1996-08-09", "15", "mission main", "boston", 25, 40, 100, 60);
+        
+        for(Patient patient: patientDirectory.getDirectory())
+            personDirectory.getDirectory().add(patient);
+        
     }
     
 
