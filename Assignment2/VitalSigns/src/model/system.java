@@ -54,14 +54,14 @@ public class system {
                 case 7:
                     ArrayList<Community> allCommunities;
                     int good = 0, bad = 0;
-                    System.out.println("\nEnter the Vital Sign Name to check: ");
-                    scanner = new Scanner(System.in);
-                    String condition = scanner.nextLine();
                     allCommunities = showAllCommunities(false);
                     if(allCommunities.isEmpty()) {
                         System.out.println("There is no data.\nReturning to main menu.");
-                        return;
+                        break;
                     }
+                    System.out.println("\nEnter the Vital Sign Name to check: ");
+                    scanner = new Scanner(System.in);
+                    String condition = scanner.nextLine();
                     Boolean vitalSignExists = true;
                     for (Community community: allCommunities) {
                         for(Patient p: patientDirectory.getDirectory()) {
@@ -80,8 +80,8 @@ public class system {
                         }
                         if(!vitalSignExists)
                             break;
-                        System.out.println("Patients with Normal "+condition + " in "+community+":"+good);
-                        System.out.println("Patients with abormal "+condition + " in "+community+":"+bad);
+                        System.out.println("Patients with Normal "+condition + " in "+community.getCommunityName()+", "+community.getCityName()+": "+good);
+                        System.out.println("Patients with abormal "+condition + " in "+community.getCommunityName()+", "+community.getCityName()+": "+bad);
                     }
                     break;
                 case 9:
@@ -105,18 +105,26 @@ public class system {
     
     private static ArrayList<City> showAllCities(Boolean print){
         Set<City> distinctCities = new HashSet<>();
-        for(Person p: personDirectory.getDirectory()) {
-            if(distinctCities.isEmpty()) {
-                distinctCities.add((City)p);
-            }
-            else {
-                for(City city: distinctCities) {
-                    if(p.getCityName().toLowerCase().equals(city.getCityName().toLowerCase()))
-                        continue;
-                    else
+        int personCount = 0;
+        while(personCount != personDirectory.getDirectory().size()) {
+            personCount = 0;
+            try {
+                for(Person p: personDirectory.getDirectory()) {
+                    if(distinctCities.isEmpty()) {
                         distinctCities.add((City)p);
+                    }
+                    else {
+                        for(City city: distinctCities) {
+                            if(p.getCityName().toLowerCase().equals(city.getCityName().toLowerCase()))
+                                continue;
+                            else
+                                distinctCities.add((City)p);
+                        }
+                    }
+                    personCount++;
                 }
             }
+            catch(Exception e){ }
         }
         int i = 1;
         ArrayList<City> distinctCitiesList = new ArrayList<>();
@@ -142,7 +150,7 @@ public class system {
         System.out.println("\nChoose one of the cities to get into details\nOR type something to go back to previous menu: : ");
         try {
             choice = scanner.nextInt();
-            selectedCity = personDirectory.directory.get(choice - 1).getCityName();
+            selectedCity = allCities.get(choice - 1).getCityName();
             showSelectedCity(selectedCity);
         }
         catch(Exception e){
@@ -152,19 +160,27 @@ public class system {
     
     private static ArrayList<Community> showAllCommunities(Boolean print){
         Set<Community> distinctCommunities = new HashSet<>();
-        for(Person p: personDirectory.getDirectory()) {
-            if(distinctCommunities.isEmpty()) {
-                distinctCommunities.add((Community)p);
-            }
-            else {
-                for(Community community: distinctCommunities) {
-                    if(p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) && 
-                            p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
-                        continue;
-                    else
+        int personCount = 0;
+        while(personCount != personDirectory.getDirectory().size()) {
+            personCount = 0;
+            try {
+                for(Person p: personDirectory.getDirectory()) {
+                    if(distinctCommunities.isEmpty()) {
                         distinctCommunities.add((Community)p);
+                    }
+                    else {
+                        for(Community community: distinctCommunities) {
+                            if(p.getCommunityName().toLowerCase().equals(community.getCommunityName().toLowerCase()) && 
+                                    p.getCityName().toLowerCase().equals(community.getCityName().toLowerCase()))
+                                continue;
+                            else
+                                distinctCommunities.add((Community)p);
+                        }
+                    }
+                    personCount++;
                 }
             }
+            catch(Exception e){ }
         }
         int i = 1;
         ArrayList<Community> distinctCommunitiesList = new ArrayList<>();
@@ -191,7 +207,7 @@ public class system {
         try {
             choice = scanner.nextInt();
             selectedCommunity = allCommunities.get(choice - 1).getCommunityName();
-            showSelectedCommunity(selectedCommunity, personDirectory.directory.get(choice - 1).getCityName());
+            showSelectedCommunity(selectedCommunity, allCommunities.get(choice - 1).getCityName());
         }
         catch(Exception e){
             System.out.println("Going to previous menu\n");
@@ -378,8 +394,10 @@ public class system {
             switch(choice){
                 case 1:
                     for(Patient patient: patientDirectory.getDirectory()) {
-                        if(patient.isPatientNormal() && patient.getCommunityName().toLowerCase().equals(selectedCommunity.toLowerCase())
-                                && patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
+                        if(!patient.getCommunityName().toLowerCase().equals(selectedCommunity.toLowerCase())
+                                || !patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
+                            continue;
+                        if(patient.isPatientNormal())
                             good++;
                         else
                             bad++;
@@ -425,7 +443,9 @@ public class system {
             switch(choice){
                 case 1:
                     for(Patient patient: patientDirectory.getDirectory()) {
-                        if(patient.isPatientNormal() && patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
+                        if(!patient.getCityName().toLowerCase().equals(selectedCity.toLowerCase()))
+                            continue;
+                        if(patient.isPatientNormal())
                             good++;
                         else
                             bad++;
