@@ -37,6 +37,9 @@ public class ReportJPanel extends javax.swing.JPanel {
         txtSavingsRoutingNum.setText(person.getSavingsAcc().getRoutingNum());
         txtCity.setText(person.getAddress().getCity());
         txtDob.setText(person.getDob());
+        txtStreet.setText(person.getAddress().getStreet());
+        txtCity.setText(person.getAddress().getCity());
+        
         txtFirstName.setText(person.getFirstName());
         txtLastName.setText(person.getLastName());
         txtLicDateExpiry.setText(person.getDriverLicence().getDateExpiry());
@@ -223,6 +226,11 @@ public class ReportJPanel extends javax.swing.JPanel {
         txtLastName.setEditable(false);
 
         txtStreet.setEditable(false);
+        txtStreet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStreetActionPerformed(evt);
+            }
+        });
 
         txtCity.setEditable(false);
 
@@ -543,6 +551,10 @@ public class ReportJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtStreetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStreetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStreetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
