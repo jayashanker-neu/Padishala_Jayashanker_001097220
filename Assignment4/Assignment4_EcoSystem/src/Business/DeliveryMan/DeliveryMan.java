@@ -5,22 +5,23 @@
  */
 package Business.DeliveryMan;
 
-import Business.UserAccount.UserAccount;
-
 /**
  *
  * @author harold
  */
 public class DeliveryMan {
     private String name;
-    private UserAccount userAccount;
+    private String address;
+    private String email;
+    private String phoneNumber;
+    private int age;
     
-    public DeliveryMan(){
-        userAccount = new UserAccount();
-    }
-    
-    public DeliveryMan(UserAccount userAccount){
-        this.userAccount = userAccount;
+    public DeliveryMan(String name, String address, String email, String phoneNumber, int age) {
+        this.name = name;
+        this.address = address;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public String getName() {
@@ -31,16 +32,42 @@ public class DeliveryMan {
         this.name = name;
     }
 
-    public UserAccount getUserAccount() {
-        return userAccount;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
     
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
+    
+    
 }

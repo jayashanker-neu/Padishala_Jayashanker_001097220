@@ -5,7 +5,6 @@
  */
 package Business.Restaurant;
 
-import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -13,42 +12,39 @@ import java.util.ArrayList;
  * @author harold
  */
 public class RestaurantDirectory {
-    private ArrayList<Restaurant> restaurantList;
-
+    
+    private ArrayList<Restaurant> restaurantDirectory;
+    
     public RestaurantDirectory() {
-        restaurantList = new ArrayList<Restaurant>();
+        restaurantDirectory = new ArrayList();
     }
 
-    public ArrayList<Restaurant> getRestaurantList() {
-        return restaurantList;
+    public ArrayList<Restaurant> getRestaurantDirectory() {
+        return restaurantDirectory;
     }
 
-    public void setRestaurantList(ArrayList<Restaurant> restaurantList) {
-        this.restaurantList = restaurantList;
+    public void setRestaurantDirectory(ArrayList<Restaurant> restaurantDirectory) {
+        this.restaurantDirectory = restaurantDirectory;
     }
     
-//    public Restaurant createRestaurant(String name, String managerName, int phoneNumber, String address, UserAccount userAccount){
-//        Restaurant r = new Restaurant();
-//        r.setName(name);
-//        r.setManagerName(managerName);
-//        r.setPhoneNumber(phoneNumber);
-//        r.setAddress(address);
-//        r.setUserAccount(userAccount);
-//        restaurantList.add(r);  
-//        return r;
-//    }
-    
-    public Restaurant createRestaurant(String name, String managerName, int phoneNumber, String address){
-        Restaurant r = new Restaurant();
-        r.setName(name);
-        r.setManagerName(managerName);
-        r.setPhoneNumber(phoneNumber);
-        r.setAddress(address);
-        restaurantList.add(r);  
-        return r;
+    public Restaurant newRestaurant(String name, String address, String mName, String phoneNumber) {
+        Restaurant restaurant = new Restaurant(name, address, mName, phoneNumber);
+        restaurantDirectory.add(restaurant);
+        System.out.println(restaurantDirectory.size() + "New Res");
+        return restaurant;
     }
     
-    public void deleteRestaurant(Restaurant restaurant) {
-        restaurantList.remove(restaurant);
+    public void removeRestaurant(Restaurant restaurant){
+        restaurantDirectory.remove(restaurant);
     }
+    
+    public Restaurant getRestaurant(String name) {
+        for(Restaurant r : restaurantDirectory) {
+            if(r.getRestaurantName().equals(name)) {
+                return r;
+            }
+        }
+        return null;
+    }
+    
 }

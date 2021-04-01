@@ -5,7 +5,6 @@
  */
 package Business.DeliveryMan;
 
-import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -13,35 +12,27 @@ import java.util.ArrayList;
  * @author harold
  */
 public class DeliveryManDirectory {
-    private ArrayList<DeliveryMan> deliveryManList;
-
+    private ArrayList<DeliveryMan> deliveryManDirectory;
+    
     public DeliveryManDirectory() {
-        deliveryManList = new ArrayList<DeliveryMan>();
+        deliveryManDirectory = new ArrayList();
     }
 
-    public ArrayList<DeliveryMan> getDeliveryManList() {
-        return deliveryManList;
+    public ArrayList<DeliveryMan> getDeliveryManDirectory() {
+        return deliveryManDirectory;
     }
 
-    public void setDeliveryManList(ArrayList<DeliveryMan> deliveryManList) {
-        this.deliveryManList = deliveryManList;
+    public void setDeliveryManDirectory(ArrayList<DeliveryMan> deliveryManDirectory) {
+        this.deliveryManDirectory = deliveryManDirectory;
     }
     
-    public DeliveryMan createDeliveryMan(String name, UserAccount userAccount){
-        DeliveryMan d = new DeliveryMan(userAccount);
-        d.setName(name);
-        deliveryManList.add(d);  
-        return d;
+    public DeliveryMan newDeliveryMan(String name, String address, String email, String phoneNumber, int age) {
+        DeliveryMan deliveryMan = new DeliveryMan(name, address, email, phoneNumber, age);
+        deliveryManDirectory.add(deliveryMan);
+        return deliveryMan;
     }
     
-    public DeliveryMan createDeliveryMan(String name){
-        DeliveryMan d = new DeliveryMan();
-        d.setName(name);
-        deliveryManList.add(d);  
-        return d;
-    }
-    
-    public void deleteDeliveryMan(DeliveryMan deliveryMan) {
-        deliveryManList.remove(deliveryMan);
+    public void removeDeliveryMan(DeliveryMan deliveryMan) {
+        deliveryManDirectory.remove(deliveryMan);
     }
 }

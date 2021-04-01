@@ -5,7 +5,6 @@
  */
 package Business.Customer;
 
-import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -13,41 +12,40 @@ import java.util.ArrayList;
  * @author harold
  */
 public class CustomerDirectory {
-    private ArrayList<Customer> customerList;
-
+    
+    private ArrayList<Customer> customerDirectory;
+    
     public CustomerDirectory() {
-        customerList = new ArrayList<Customer>();
+        
+        customerDirectory = new ArrayList();
+        
     }
 
-    public ArrayList<Customer> getCustomerList() {
-        return customerList;
+    public ArrayList<Customer> getCustomerDirectory() {
+        return customerDirectory;
     }
 
-    public void setCustomerList(ArrayList<Customer> customerList) {
-        this.customerList = customerList;
+    public void setCustomerDirectory(ArrayList<Customer> customerDirectory) {
+        this.customerDirectory = customerDirectory;
     }
     
-    public Customer createCustomer(String name, String address, int phoneNumber, UserAccount userAccount){
-        Customer c = new Customer(userAccount);
-        c.setName(name);
-        c.setAddress(address);
-        c.setPhoneNumber(phoneNumber);
-        customerList.add(c);  
-        return c;
-    }
-	
-	public Customer createCustomer(String name, String address, int phoneNumber){
-        Customer c = new Customer();
-        c.setName(name);
-        c.setAddress(address);
-        c.setPhoneNumber(phoneNumber);
-        customerList.add(c);  
-        return c;
+    public Customer newCustomer(String name, String email, String phoneNumber, int age, String homeAddress, String userName){
+        Customer customer = new Customer(name, email, phoneNumber, age, homeAddress, userName);
+        customerDirectory.add(customer);
+        return customer;
     }
     
-     public void deleteCustomer(Customer customer) {
-        customerList.remove(customer);
+    public void removeCustomer(Customer customer){
+        customerDirectory.remove(customer);
     }
     
+    public Customer getCustomer(String name){
+        for(Customer customer: customerDirectory){
+            if(customer.getName().equalsIgnoreCase(name)){
+                return customer;
+            }
+        }
+        return null;
+    }
     
 }

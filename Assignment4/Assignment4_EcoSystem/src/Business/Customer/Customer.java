@@ -5,32 +5,26 @@
  */
 package Business.Customer;
 
-import Business.UserAccount.UserAccount;
-
 /**
  *
  * @author harold
  */
 public class Customer {
+    
     private String name;
-    private String address;
-    private int phoneNumber; 
-    private UserAccount userAccount;
+    private String email;
+    private String phoneNumber;
+    private int age;
+    private String homeAddress;
+    private String userName;
    
-    public Customer(){
-        userAccount = new UserAccount();
-    }
-	
-    public Customer(UserAccount userAccount){
-        this.userAccount = userAccount;
-    }
-
-    public UserAccount getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
+    public Customer(String name, String email, String phoneNumber, int age, String homeAddress, String userName) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.homeAddress = homeAddress;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -41,24 +35,50 @@ public class Customer {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     @Override
-    public String toString(){
-        return name;
+    public String toString() {
+        return userName;
     }
+    
+    
 }
