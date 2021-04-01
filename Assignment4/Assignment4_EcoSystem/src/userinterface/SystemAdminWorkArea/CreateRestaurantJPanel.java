@@ -24,15 +24,15 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem ecoSystem;
-    private RestaurantDirectory restaurantDirectory;
+//    private RestaurantDirectory restaurantDirectory;
     /**
      * Creates new form CreateRetaurantJPanel
      */
-    public CreateRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, RestaurantDirectory restaurantDirectory) {
+    public CreateRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecoSystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
-        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
+//        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
     }
 
     /**
@@ -222,7 +222,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         
-        for(Restaurant restaurant : restaurantDirectory.getRestaurantDirectory()) {
+        for(Restaurant restaurant : ecoSystem.getRestaurantDirectory().getRestaurantDirectory()) {
             if(restaurant.getPhoneNumber().equals(phoneNumber)) {
                 JOptionPane.showMessageDialog(null, "Phone Number already exists");
                 return;

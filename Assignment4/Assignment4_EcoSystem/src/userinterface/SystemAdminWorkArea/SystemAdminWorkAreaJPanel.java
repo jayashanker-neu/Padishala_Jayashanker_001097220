@@ -212,14 +212,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
 
-        ManageCustomerJPanel mcjp = new ManageCustomerJPanel(userProcessContainer, ecosystem, ecosystem.getCustomerDirectory());
+        ManageCustomerJPanel mcjp = new ManageCustomerJPanel(userProcessContainer, ecosystem);
         userProcessContainer.add("ManageCustomersJPanel",mcjp);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantActionPerformed
-        ManageRestaurantJPanel mrjp = new ManageRestaurantJPanel(userProcessContainer, ecosystem, ecosystem.getRestaurantDirectory());
+        ManageRestaurantJPanel mrjp = new ManageRestaurantJPanel(userProcessContainer, ecosystem);
         userProcessContainer.add("ManageRestaurantJPanel",mrjp);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

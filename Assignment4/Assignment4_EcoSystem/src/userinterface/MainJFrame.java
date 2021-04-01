@@ -11,9 +11,11 @@ import Business.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Employee.Employee;
 import Business.Menu.MenuDirectory;
 import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
+import Business.Role.SystemAdminRole;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,38 +32,12 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-//    private UserAccount userAccount;
-//    private JPanel userProcessContainer;
-//    private CustomerDirectory customerDirectory;
-//    private RestaurantDirectory restaurantDirectory;
-//    private DeliveryManDirectory deliveryManDirectory;
-//    private MenuDirectory menuDirectory;
-//    private OrderDirectory orderDirectory;
 
     public MainJFrame() {
         initComponents();
         
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
-//        System.out.println(system);
-//        System.out.println(system.getRestaurantDirectory());
-//        System.out.println(system.getRestaurantDirectory().getRestaurantDirectory());
-//        System.out.println(system.getRestaurantDirectory().getRestaurantDirectory().size());
-        //system.setCustomerDirectory(new CustomerDirectory());
-//        if(system.getCustomerDirectory() == null)
-//            customerDirectory = new CustomerDirectory();
-//        if(system.getRestaurantDirectory()== null)
-//            restaurantDirectory = new RestaurantDirectory();
-//        if(system.getDeliveryManDirectory()== null)
-//            deliveryManDirectory = new DeliveryManDirectory();
-//        if(system.getMenuDirectory()== null)
-//            menuDirectory = new MenuDirectory();
-//        if(system.getOrderDirectory()== null)
-//            orderDirectory = new OrderDirectory();
-//        system.setDeliveryManDirectory(new DeliveryManDirectory());
-//        system.setMenuDirectory(new MenuDirectory());
-//        system.setRestaurantDirectory(new RestaurantDirectory());
-//        system.setOrderDirectory(new OrderDirectory());
 //        
     }
 
@@ -169,16 +145,21 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         
         else if(system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText()) == null) {
-            JOptionPane.showMessageDialog(null,"Invalid UserName");
+            JOptionPane.showMessageDialog(null,"Invalid UserName/Password");
             return;
         }
         
         
         UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText());
         
-        System.out.println("EcoSYSTEM MAIN" + system.toString() + system.getUserAccountDirectory().getUserAccountList().size());
+//        System.out.println("EcoSYSTEM MAIN" + system.toString() + system.getUserAccountDirectory().getUserAccountList().size());
         
         CardLayout layout = (CardLayout) container.getLayout();
+        
+        loginJButton.setEnabled(false);
+        logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
         
 //        system.setCustomerDirectory(customerDirectory);
 //        system.setDeliveryManDirectory(deliveryManDirectory);

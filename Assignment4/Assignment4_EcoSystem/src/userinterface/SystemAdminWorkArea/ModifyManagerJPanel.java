@@ -21,17 +21,17 @@ public class ModifyManagerJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem ecoSystem;
-    private RestaurantDirectory restaurantDirectory;
+//    private RestaurantDirectory restaurantDirectory;
     private Restaurant restaurant;
     /**
      * Creates new form ModifyManagerJPanel
      */
-    public ModifyManagerJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, RestaurantDirectory restaurantDirectory, Restaurant restaurant) {
+    public ModifyManagerJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, Restaurant restaurant) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.restaurant = restaurant;
-        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
+//        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
         txtRestaurantName.setText(restaurant.getRestaurantName());
         txtAddress.setText(restaurant.getAddress());
         txtPhoneNumber.setText(restaurant.getPhoneNumber());
@@ -178,7 +178,7 @@ public class ModifyManagerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Phone Number must have digits only");
             return;
         }
-        for(Restaurant res : restaurantDirectory.getRestaurantDirectory()) {
+        for(Restaurant res : ecoSystem.getRestaurantDirectory().getRestaurantDirectory()) {
             if(res.getPhoneNumber().equals(phoneNumber) && this.restaurant != res) {
                 JOptionPane.showMessageDialog(null, "Phone Number already exists");
                 return;

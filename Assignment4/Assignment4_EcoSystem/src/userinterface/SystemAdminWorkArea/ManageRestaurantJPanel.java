@@ -22,15 +22,15 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private EcoSystem ecoSystem;
-    private RestaurantDirectory restaurantDirectory;
+//    private RestaurantDirectory restaurantDirectory;
     /**
      * Creates new form ManageRestaurantJPanel
      */
-    public ManageRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, RestaurantDirectory restaurantDirectory) {
+    public ManageRestaurantJPanel(JPanel userProcessContainer, EcoSystem ecoSystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem =  ecoSystem;
-        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
+//        this.restaurantDirectory = ecoSystem.getRestaurantDirectory();
         populateTable();
     }
     
@@ -50,7 +50,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
     public void refreshTable() {
         DefaultTableModel dtm = (DefaultTableModel) tblRestaurant.getModel();
         dtm.setRowCount(0);
-        for(Restaurant restaurant : restaurantDirectory.getRestaurantDirectory()){
+        for(Restaurant restaurant : ecoSystem.getRestaurantDirectory().getRestaurantDirectory()){
             Object [] row = new Object[4];
             row[0] = restaurant;
             row[1] = restaurant.getAddress();
@@ -199,7 +199,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             return;
         }
         Restaurant restaurant = (Restaurant)tblRestaurant.getValueAt(selectedRow,0);
-        ModifyManagerJPanel modifyManager = new ModifyManagerJPanel(userProcessContainer, ecoSystem, restaurantDirectory, restaurant);
+        ModifyManagerJPanel modifyManager = new ModifyManagerJPanel(userProcessContainer, ecoSystem, restaurant);
         userProcessContainer.add("ModifyManagerJPanel",modifyManager);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -207,7 +207,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CreateRestaurantJPanel createRestaurant = new CreateRestaurantJPanel(userProcessContainer, ecoSystem, restaurantDirectory);
+        CreateRestaurantJPanel createRestaurant = new CreateRestaurantJPanel(userProcessContainer, ecoSystem);
         userProcessContainer.add("CreateCustomersJPanel",createRestaurant);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -223,7 +223,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         }
 
         Restaurant restaurant = (Restaurant) tblRestaurant.getValueAt(selectedRow, 0);
-        restaurantDirectory.removeRestaurant(restaurant);
+        ecoSystem.getRestaurantDirectory().removeRestaurant(restaurant);
         populateTable();
 
     }//GEN-LAST:event_btnDeleteActionPerformed
