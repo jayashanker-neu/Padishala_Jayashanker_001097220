@@ -44,14 +44,43 @@ public class EcoSystem extends Organization{
         roleList.add(new SystemAdminRole());
         return roleList;
     }
+    
     private EcoSystem(){
         super(null);
+        customerDirectory  = new CustomerDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();
+        restaurantDirectory = new RestaurantDirectory();
        // networkList=new ArrayList<Network>();
+    }
+    
+    public CustomerDirectory getCustomerDirectory() {
+        return customerDirectory;
+    }
+
+    public void setCustomerDirectory(CustomerDirectory customerDirectory) {
+        this.customerDirectory = customerDirectory;
+    }
+    
+    public DeliveryManDirectory getDeliveryManDirectory() {
+        return deliveryManDirectory;
+    }
+
+    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
+        this.deliveryManDirectory = deliveryManDirectory;
+    }
+
+    public RestaurantDirectory getRestaurantDirectory() {
+        return restaurantDirectory;
+    }
+
+    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
+        this.restaurantDirectory = restaurantDirectory;
     }
 
     
     public boolean checkIfUserIsUnique(String userName){
-       //
-       return false;
+        //
+        
+       return this.getUserAccountDirectory().checkIfUsernameIsUnique(userName);
     }
 }

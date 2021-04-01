@@ -3,6 +3,8 @@
 package userinterface.RestaurantAdminRole;
 
 
+import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -13,13 +15,16 @@ import javax.swing.JPanel;
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
+    EcoSystem ecoSystem;
+    private Restaurant restaurant;
     
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecoSystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.ecoSystem = ecoSystem;
       
-        //valueLabel.setText();
+        valueLabel.setText(restaurant.getName());
     }
     
     /** This method is called from within the constructor to
