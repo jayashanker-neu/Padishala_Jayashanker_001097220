@@ -76,7 +76,8 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 153, 153));
+        setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,6 +92,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblOrder);
 
+        btnCompleted.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCompleted.setText("Completed");
         btnCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +100,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAccepted.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAccepted.setText("Accepted");
         btnAccepted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +111,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Orders");
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

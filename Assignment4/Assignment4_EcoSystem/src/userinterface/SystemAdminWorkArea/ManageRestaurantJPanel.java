@@ -80,7 +80,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Manage Restaurant");
@@ -110,6 +110,8 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             tblRestaurant.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        btnModify.setBackground(new java.awt.Color(0, 153, 153));
+        btnModify.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnModify.setText("Modify Restaurant");
         btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +119,8 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCreate.setBackground(new java.awt.Color(0, 153, 153));
+        btnCreate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCreate.setText("Create Restaurant");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +128,8 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(0, 153, 153));
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnDelete.setText("Delete Restaurant");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +137,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

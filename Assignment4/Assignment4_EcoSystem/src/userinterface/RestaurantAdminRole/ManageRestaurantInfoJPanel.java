@@ -84,7 +84,7 @@ public class ManageRestaurantInfoJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 153, 153));
 
         tblRestaurant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +107,7 @@ public class ManageRestaurantInfoJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblRestaurant);
 
+        btnModify.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnModify.setText("Modify Restaurant");
         btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +115,7 @@ public class ManageRestaurantInfoJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,9 +138,7 @@ public class ManageRestaurantInfoJPanel extends javax.swing.JPanel {
                         .addGap(82, 82, 82)
                         .addComponent(jLabel1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(159, 159, 159)))
+                    .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
