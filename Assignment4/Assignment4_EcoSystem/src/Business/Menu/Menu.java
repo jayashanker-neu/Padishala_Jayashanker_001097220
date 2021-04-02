@@ -7,7 +7,7 @@ package Business.Menu;
 
 /**
  *
- * @author jshar
+ * @author Jayashanker Padishala
  */
 public class Menu {
     private String itemName;

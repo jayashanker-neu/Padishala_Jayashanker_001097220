@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author harold
+ * @author Jayashanker Padishala
  */
 public class RestaurantDirectory {
     

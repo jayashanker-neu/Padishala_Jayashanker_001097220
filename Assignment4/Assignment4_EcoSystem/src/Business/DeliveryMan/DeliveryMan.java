@@ -7,7 +7,7 @@ package Business.DeliveryMan;
 
 /**
  *
- * @author harold
+ * @author Jayashanker Padishala
  */
 public class DeliveryMan {
     private String name;

@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author jshar
+ * @author Jayashanker Padishala
  */
 public class CreateRestaurantJPanel extends javax.swing.JPanel {
 

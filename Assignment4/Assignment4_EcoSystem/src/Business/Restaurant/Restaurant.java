@@ -9,7 +9,7 @@ import Business.Menu.MenuDirectory;
 
 /**
  *
- * @author harold
+ * @author Jayashanker Padishala
  */
 public class Restaurant {
     private String restaurantName;

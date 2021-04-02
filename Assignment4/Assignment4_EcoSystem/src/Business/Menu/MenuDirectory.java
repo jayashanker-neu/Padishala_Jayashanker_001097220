@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author jshar
+ * @author Jayashanker Padishala
  */
 public class MenuDirectory {
     private ArrayList<Menu> menuDirectory;
